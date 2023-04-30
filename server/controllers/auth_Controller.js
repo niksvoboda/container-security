@@ -3,7 +3,6 @@
  */
 const config    = require("config");
 const Users     = require("../models/_users.js");
-const Log       = require("../components/log.js");
 const jwt       = require('jsonwebtoken');
 
 /**
@@ -27,7 +26,7 @@ const generateToken = (id, username, login, role, permissions) =>{
     return jwt.sign(payload, secret_key, {expiresIn: expires_in})
 }
 
-class AuthController extends Log {
+class AuthController {
     name = "AuthController";
     /**
      * @description Функция авторизации
@@ -41,13 +40,15 @@ class AuthController extends Log {
             const {email, password} = req.body
             /** если пользователя с таким логином нет то возвращаем информацию об этом */
             //console.log(email, password)
-            const user = await Users.getUserByLoginWithRole(email);
-          //  console.log(user)
+            let user = await Users.getUserByLoginWithRole(email);
+            user  = user[0]     
+            console.log(user)
             if(!user){
                 return res.status(400).json({message: 'Пользователь не найден'})
             }
             /** Проверяем логин, пароль и активен ли юзер если не правильный - сообщаем */
-            
+        //    console.log(password)
+          //  console.log(user?.passwd)
             const passwd_check = await Users.checkPassword(password, user?.passwd);
             if (user && user?.enabled && passwd_check)  {
                  /** Если пароль правильный - генерируем и возращаем JWT-токен */
@@ -83,7 +84,7 @@ class AuthController extends Log {
     }
     
     async logout(req, res, next){
-        self.d(".logout");
+      
         const {id, username, login} = req.body
              /** Логируем */
           //   console.log(req.user_data)
@@ -98,5 +99,4 @@ class AuthController extends Log {
     }  
 }
 
-const self = new AuthController();
-module.exports = self;
+module.exports = new AuthController();

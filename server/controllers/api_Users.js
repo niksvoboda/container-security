@@ -1,15 +1,12 @@
-const Log  = require("../components/log.js"); 
 const Users  = require("../models/_users"); 
     /**
      * Класс данных для страницы заказчиков
      */
-class Api_Users extends Log {
-    
+class Api_Users  {
+        
     name = "Api_Users";
 
-    async getEntrys(req, res) {
-        self.d(".getEntrys");
-        
+    async getEntrys(req, res) {        
         try {
         const {start, length, search} = req.query;
         const result = await Users.getEntrys(search);
@@ -28,7 +25,6 @@ class Api_Users extends Log {
 
     /** Для формы редактирования */
     async getEntry(req, res) {
-        self.d(".getEntry");
     try {
         const {id} = req.query
         return res.status(200).json(response)
@@ -39,7 +35,6 @@ class Api_Users extends Log {
     }
 
     async addEntry(req, res) {
-        self.d(".addEntry");
     try {
         const {data} = req.body.params
         return res.status(200).json(response)
@@ -50,7 +45,6 @@ class Api_Users extends Log {
     }
 
     async updateEntry(req, res) {
-        self.d(".updateEntry");
     try {
         const {data ,id} = req.body.params
         return res.status(200).json(response)
@@ -61,7 +55,6 @@ class Api_Users extends Log {
     }
 
     async deleteEntry(req, res) {
-        self.d(".deleteEntry");
     try {
         const {id} = req.body.params
 
@@ -71,8 +64,6 @@ class Api_Users extends Log {
         return res.status(400).json(error)
     }
     }
-
 }
 
-const self = new Api_Users();
-module.exports = self;
+module.exports = new Api_Users();

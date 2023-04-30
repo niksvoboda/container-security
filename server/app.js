@@ -5,6 +5,7 @@ const fs            = require("fs");
 const https         = require("https");
 const express       = require('express');
 
+const router        = require("./routers/api_Router");
 const app           = express();
 const db            = require('./components/db');
 const console_log   = require('./components/console_log');
@@ -18,7 +19,7 @@ class App {
         /** Подключаем возможность обращения к нашему API с помощью JSON-запросов */
         app.use(express.json())
         /** Подключаем роутер API */
-      //  app.use('/api', router)
+        app.use('/api', router)
         this.showSplash();
        // this.startClient();
         this.startServer();

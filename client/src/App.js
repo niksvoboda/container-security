@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   BrowserRouter,
 } from "react-router-dom";
-import Tpl_login from './templates/tpl_login';
 import { UserContext } from './contex';
 import AppRouter from './components/AppRouter';
 import jwt_decode from "jwt-decode";
