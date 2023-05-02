@@ -1,6 +1,6 @@
 import React, { useContext} from 'react';
 import { useForm } from "react-hook-form"
-import { UserContext } from '../../contex';
+import { UserContext } from '../../../contex';
 
 export const Modal = ({entry, confirm_save_Entry , exit}) => {
    /** Ролевая модель */
@@ -40,9 +40,9 @@ return (
 <div 
  onClick={e=>exit()}
 style={{display: 'block', background: ' rgba(0,0,0,0.5)'}}
-className="modal fade show" >
-       <div class="modal-dialog modal-dialog-centered modal-lg" role="document" onClick={event =>{event.stopPropagation()}}>
-        <div class="modal-content">
+className="modal fade show " >
+       <div class="modal-dialog modal-dialog-centered modal-lg " role="document" onClick={event =>{event.stopPropagation()}}>
+        <div class="modal-content dark-version">
           <div class="modal-header">
           <h5 className="modal-title font-weight-normal">{entry?.data? 'Редактирование '  : 'Добавление '}пользователя</h5>
             <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">

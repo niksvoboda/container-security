@@ -8,7 +8,7 @@ const Aside = () => {
    const location = useLocation()
    const currentItem = aside_menu.filter(menuitem => menuitem.link === location.pathname);
    useEffect(() => {
-      document.title =  'ООО "Динатех" / '+ currentItem[0].name;
+      document.title =  'CS Monitor  / '+ currentItem[0].name;
     }, [currentItem]);
     return (
         
@@ -17,7 +17,7 @@ const Aside = () => {
       <i className="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a className="navbar-brand m-0" >
         <img src="../assets/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo"/>
-        <span className="ms-1 font-weight-bold text-white">ООО "Динатех"</span>
+        <span className="ms-1 font-weight-bold text-white">CS Monitor</span>
       </a>
     </div>
     <hr className="horizontal light mt-0 mb-2"/>
@@ -34,8 +34,7 @@ const Aside = () => {
                <span className="nav-link-text ms-1">{item.name}</span>
              </Link>
            </li>
-        )}
-        
+        )}        
       </ul>
     </div>
     <div className="sidenav-footer position-absolute w-100 bottom-0 ">

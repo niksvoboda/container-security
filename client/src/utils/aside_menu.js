@@ -1,8 +1,15 @@
-import {MAIN_ROUTE, USERS_ROUTE, LOGOUT_ROUTE} from "./routes";
+import {LOGIN_ROUTE, LOGOUT_ROUTE,
+      MAIN_ROUTE, BESTPRACTICE_ROUTE, DASHBOARD_ROUTE, REPORTS_ROUTE, 
+      SCHEDULEDJOBS_ROUTE,  SETTINGS_ROUTE, VULNERABILITIES_ROUTE} from "./routes";
 
 export const aside_menu = [
-        {link:MAIN_ROUTE, icon: 'person', name: 'Главная' },        
-        {link:USERS_ROUTE, icon: 'table_view', name: 'Пользователи' },       
+        {link:MAIN_ROUTE, icon: 'person', name: 'Главная' },                
+        {link:BESTPRACTICE_ROUTE, icon: 'table_view', name: 'Bestpractice' },        
+        {link:DASHBOARD_ROUTE, icon: 'table_view', name: 'Dashboard' },        
+        {link:REPORTS_ROUTE, icon: 'table_view', name: 'Reports' },        
+        {link:SCHEDULEDJOBS_ROUTE, icon: 'table_view', name: 'Scheduledjobs' },        
+        {link:SETTINGS_ROUTE, icon: 'table_view', name: 'Настройки' },
+        {link:VULNERABILITIES_ROUTE, icon: 'table_view', name: 'Vulnerabilities' },       
         {link:LOGOUT_ROUTE, icon: 'login', name: 'Выход' },
 
         //неиспользуемые        

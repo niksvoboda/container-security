@@ -7,13 +7,14 @@ import Footer from '../components/UI/footer';
 const Tpl_main = (props) => {
 const {page} = props;
 const [side_conf_show, set_side_conf_show] = useState(false);
+const [footer_show, set_footer_show] = useState(false);
 return (
 <>
 <Aside/>
 <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 <Navbar/>
 {page}
-<Footer/>
+{footer_show && <Footer/>}
 </main>
 {side_conf_show && <Side_conf/>}
 </>

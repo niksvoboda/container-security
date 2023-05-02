@@ -1,15 +1,15 @@
 import React, { useState ,useEffect, useContext} from 'react';
-import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../http/api_users";
-import Pagenumbers from '../../components/UI/pagenumbers';
-import { Pagination } from '../../components/UI/pagination';
-import { Select } from "../../components/UI/select";
+import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_users";
+import Pagenumbers from '../../../components/UI/pagenumbers';
+import { Pagination } from '../../../components/UI/pagination';
+import { Select } from "../../../components/UI/select";
 //import date_format  from "dateformat";
-import Searchinput from '../../components/UI/searchinput';
+import Searchinput from '../../../components/UI/searchinput';
 import { Modal } from './modal';
 import { ModalDelete } from './modal_delete';
 import { useSnackbar } from 'react-simple-snackbar'
-import { option_green_snackbar, option_red_snackbar } from '../../components/UI/Snackbar';
-import { UserContext } from '../../contex';
+import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/Snackbar';
+import { UserContext } from '../../../contex';
 
 const Users = () => {
 /** Ролевая модель */
@@ -26,7 +26,7 @@ const[group_search, set_group_search] = useState("")
 /** Показывать ли удаленные */
 const[deprecate, set_deprecate] = useState(1)
 //Количество записей на странице
-const [length, setLength] = useState(10);
+const [length, setLength] = useState(2);
 const [start, setStart] = useState(0);
 //Пагинация
 const [totalPage, setTotalPage] = useState(0);
@@ -239,7 +239,7 @@ return (<>
       exit = {exit}
    />: "" }
    
-<div className="container-fluid py-4">
+<div className="container-fluid py-4 ">
 <div className="row">
  <div className="col-12">
     <div className="card">
@@ -253,17 +253,18 @@ return (<>
              <div className="dataTable-top">
                 <div className="dataTable-dropdown">
                    <label>
-                   <Select 
-                      value={length}
-                      onChange={selectedSort =>setLength(selectedSort)}
+                   <Select                     
                       options={[
-                     // {type: 5, name: '5'},
-                      {type: 1, name: '10'},
+                     // 
+                      {type: 1, name: '1'},
+                      {type: 2, name: '2'},
+                      {type: 10, name: '10'},
                       {type: 25, name: '25'},
                       {type: 50, name: '50'},
                       {type: 100, name: '100'}
-                      ]}                            
-                      //defaultValue='кол-во'
+                      ]}
+                       onChange={selectedSort =>setLength(selectedSort)}
+                       defaultValue={length}
                       />                         
                     </label>&nbsp;
                    <Searchinput
@@ -278,7 +279,7 @@ return (<>
                 </button>
                 </div>
              </div>
-             <div className="dataTable-container dataTable-container-vh">
+             <div className="dataTable-container dataTable-container-vh hooks-vh-height">
                 <table className="table table-flush dataTable-table" id="datatable-search">
                    <thead className="thead-light">
                    <tr>
