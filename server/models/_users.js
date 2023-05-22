@@ -1,8 +1,5 @@
-const bcrypt   = require('bcrypt');
 const db       = require("../components/db.js");
-
 class Users {
-
     name = "Users";
     saltRounds = 10;
     /** Для авторизации */
@@ -10,105 +7,114 @@ class Users {
         const res = await db.asyncQuery("SELECT *, `tbl_users_roles`.permissions AS permissions FROM `tbl_users`  INNER JOIN `tbl_users_roles` ON tbl_users_roles.role_id = tbl_users.role_id WHERE login=(?)", [ login ]);
         return res ? res : null;
     }
-    /**
-     * Проверка переденного пороля и хеша пароля из БД
-     * @param string password       Проверяемый пароль
-     * @param string passwordHash   Хэш пароля
-     * @returns boolean             Соответствует ли пароль хешу
-     */
-    async checkPassword(password, passwordHash) {
-    
-        return await bcrypt.compare(password, passwordHash);
-    }
-
-
     /**Пользовательская часть */
      async getEntrys(search) {
         search = '%' + search + '%';
         let result = await db.asyncQuery(`SELECT * FROM tbl_users 
         WHERE username LIKE (?)
         OR login LIKE (?)
-        OR position LIKE (?)`, [search, search, search], 1);
+        OR position LIKE (?)`, [search, search, search]);
         return result;
     }
     /** Для формы редактирования */
     async getEntry(id) {
-        let result = await db.asyncQuery("SELECT * FROM tbl_requests WHERE request_id = (?)", [id]);
-        return result;
-    }
-
-    async getEntryStatus(request_status) {
-        //this.d(".getEntry");
-        let result = await db.asyncQuery("SELECT COUNT(*) AS count FROM tbl_requests WHERE request_status = (?)", [request_status]);
+        let result = await db.asyncQuery("SELECT * FROM tbl_users WHERE user_id = (?)", [id]);
         return result;
     }
 
     async addEntry(
-        address,
-        host_id,
-        config_name,
-        service_description,
-        request_type,
-        request_status,
-        contacts,
-        creator_id ) {
-        let result = await db.asyncQuery(`INSERT INTO tbl_requests 
-        (   address,
-            host_id,
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts,
-            creator_id) 
-        VALUES (?,?,?,?,?,?,?,?)`,
-         [  address,
-            host_id,
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts,
-            creator_id]);
+        user_id, 
+        username, 
+        login, 
+        password,
+        role_id, 
+        salt,
+        position, 
+        phone_int, 
+        phone_mob, 
+        email, 
+        enabled,
+        rem ) {
+        let result = await db.asyncQuery(`INSERT INTO tbl_users 
+        (   user_id, 
+            username, 
+            login, 
+            password,
+            role_id, 
+            salt,
+            position, 
+            phone_int, 
+            phone_mob, 
+            email, 
+            enabled,
+            rem) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+         [  user_id, 
+            username, 
+            login, 
+            password,
+            role_id, 
+            salt,
+            position, 
+            phone_int, 
+            phone_mob, 
+            email, 
+            enabled,
+            rem]);
         return result;
     }
     async updateEntry(
-        address,
-        host_id,
-        config_name,
-        service_description,
-        request_type,
-        request_status,
-        contacts,
-        id) {
-        let result = await db.asyncQuery(`UPDATE tbl_requests SET
-            address    = (?),
-            host_id   = (?),
-            config_name  = (?), 
-            service_description  = (?),
-            request_type  = (?),
-            request_status  = (?),
-            contacts  = (?)
-            WHERE request_id = (?)`, [
-            address,
-            host_id,    
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts, 
-            id,
+        user_id, 
+        username, 
+        login, 
+        role_id, 
+        position, 
+        phone_int, 
+        phone_mob, 
+        email, 
+        enabled,
+        rem ) {
+        let result = await db.asyncQuery(`UPDATE tbl_users SET       
+        username = (?), 
+        login = (?), 
+        role_id = (?), 
+        position = (?), 
+        phone_int = (?), 
+        phone_mob = (?), 
+        email = (?), 
+        enabled = (?),
+        rem  = (?)
+        WHERE user_id = (?)`, [
+            username, 
+            login, 
+            role_id, 
+            position, 
+            phone_int, 
+            phone_mob, 
+            email, 
+            enabled,
+            rem, 
+            user_id
         ]);
         return result;
     }
     async deleteEntry(id) {
-        let result = await db.asyncQuery("DELETE FROM tbl_requests WHERE request_id = (?)", [id]);
+        let result = await db.asyncQuery("DELETE FROM tbl_users WHERE user_id = (?)", [id]);
         return result;
     }
 
-    createPasswordHash(passwd) {
-        const salt = bcrypt.genSaltSync(this.saltRounds);
-        return bcrypt.hashSync(passwd, salt);
+    async setUserPass(user_id, pass ) {
+      
+        const res = await db.asyncQuery(`UPDATE tbl_users SET password = (?)  WHERE user_id = (?)`, 
+        [pass, user_id]);
+       // return res.length ? res[0] : res;
+    }
+
+    async setAttempts(login, attempts ) {
+    
+        const res = await db.asyncQuery(`UPDATE tbl_users SET attempts = 1  WHERE login = (?)`, 
+        [login]);
+       // return res.length ? res[0] : res;
     }
 
 

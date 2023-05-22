@@ -13,6 +13,7 @@ import Dashboard from "../pages/dashboard/dashboard";
 import Reports from "../pages/reports/reports";
 import Scheduledjobs from "../pages/scheduledjobs/scheduledjobs";
 import Vulnerabilities from "../pages/vulnerabilities/vulnerabilities";
+import Settings from "../pages/settings/settings";
 
 const AppRouter = () =>{
 const {user} = useContext(UserContext)
@@ -31,7 +32,7 @@ const authRoutes = [
             
             {path: SCHEDULEDJOBS_ROUTE, element: <Tpl_main page = {<Scheduledjobs/>}/>},
             
-            {path: SETTINGS_ROUTE, element: <Tpl_main page = {<Users/>}/>},
+            {path: SETTINGS_ROUTE, element: <Tpl_main page = {<Settings/>}/>},
             
             {path: VULNERABILITIES_ROUTE, element: <Tpl_main page = {<Vulnerabilities/>}/>},
 

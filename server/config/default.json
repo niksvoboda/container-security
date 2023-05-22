@@ -9,7 +9,8 @@
   "auth": { 
     "accessTokenExpTime": "72h",
     "refreshTokenExpTime": 200,
-    "secret_key": "1122334455"
+    "secret_key": "1122334455",    
+    "max_attempts": 5
   },
 
   "log":  {

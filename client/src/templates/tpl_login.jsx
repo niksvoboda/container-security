@@ -54,41 +54,27 @@ const now_year = new Date().getFullYear();
               <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                   <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">Вход</h4>
-                  <div className="row mt-3">
-                    <div className="col-2 text-center ms-auto">
-                      <a className="btn btn-link px-3" >
-                        <i className="fa fa-facebook text-white text-lg"></i>
-                      </a>
-                    </div>
-                    <div className="col-2 text-center px-1">
-                      <a className="btn btn-link px-3" >
-                        <i className="fa fa-github text-white text-lg"></i>
-                      </a>
-                    </div>
-                    <div className="col-2 text-center me-auto">
-                      <a className="btn btn-link px-3" >
-                        <i className="fa fa-google text-white text-lg"></i>
-                      </a>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
               <div className="card-body">
                 <form role="form" className="text-start">
-                  <div className="input-group input-group-outline my-3">
-                    <label className="form-label">Email</label>
+                  <div className="input-group input-group-outline my-3 ">
+                   
                     <input 
                     type="email" 
                     className="form-control"
+                    placeholder="Email"
                     value = {username}
                     onChange = {e=> setUsername(e.target.value)}
                     />
                   </div>
                   <div className="input-group input-group-outline mb-3">
-                    <label className="form-label">Password</label>
+                  
                     <input 
                     type="password" 
                     className="form-control"
+                    placeholder="Password"
                     value = {password}
                     onChange = {e=> setPassword(e.target.value)}
                     />
@@ -103,8 +89,8 @@ const now_year = new Date().getFullYear();
                     className="btn bg-gradient-primary w-100 my-4 mb-2">Вход</button>
                   </div>
                   <p className="mt-4 text-sm text-center">
-                    Нет аккаунта?&nbsp;
-                    <a href="#" className="text-primary text-gradient font-weight-bold">Регистрация</a>
+                  
+                    <a href="#" className="text-primary text-gradient font-weight-bold"></a>
                   </p>
                 </form>
               </div>
@@ -123,17 +109,9 @@ const now_year = new Date().getFullYear();
             <div className="col-12 col-md-6">
               <ul className="nav nav-footer justify-content-center justify-content-lg-end">
                 <li className="nav-item">
-                  <a href="#" className="nav-link text-white" target="_blank">Creative Tim</a>
+                  <a href="#" className="nav-link text-white" target="_blank"></a>
                 </li>
-                <li className="nav-item">
-                  <a href="#" className="nav-link text-white" target="_blank">About Us</a>
-                </li>
-                <li className="nav-item">
-                  <a href="#" className="nav-link text-white" target="_blank">Blog</a>
-                </li>
-                <li className="nav-item">
-                  <a href="#" className="nav-link pe-0 text-white" target="_blank">License</a>
-                </li>
+               
               </ul>
             </div>
           </div>

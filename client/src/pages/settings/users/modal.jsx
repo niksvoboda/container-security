@@ -5,7 +5,7 @@ import { UserContext } from '../../../contex';
 export const Modal = ({entry, confirm_save_Entry , exit}) => {
    /** Ролевая модель */
 const {user} = useContext(UserContext)
-      //  console.log(entry?.places)
+       console.log(entry)
         console.log(entry)
          /**Кнопка esc */
          document.addEventListener('keydown', function(e) {if( e.key === 'Escape' ){ exit(); }});
@@ -14,20 +14,14 @@ const {user} = useContext(UserContext)
             const {register, handleSubmit, formState:{errors}, setValue
             } = useForm({
             defaultValues:{
-              username:     entry?.data?.username && entry?.data?.username,
-              birth_date:   entry?.data?.birth_date && entry?.data?.birth_date,
+              username:     entry?.data?.username && entry?.data?.username,              
+              phone_int:    entry?.data?.phone_int && entry?.data?.phone_int,
               phone_mob:    entry?.data?.phone_mob && entry?.data?.phone_mob,
               login:        entry?.data?.login && entry?.data?.login,
-             // passwd:       entry?.data?.passwd && entry?.data?.passwd,
               email:        entry?.data?.email && entry?.data?.email,
-              balance:      entry?.data?.balance && entry?.data?.balance,
-              deposit_net:  entry?.data?.deposit_net && entry?.data?.deposit_net,
-              deposit_wallet:  entry?.data?.deposit_wallet && entry?.data?.deposit_wallet,
-              withdraw_net:  entry?.data?.withdraw_net && entry?.data?.withdraw_net,
-              withdraw_wallet:  entry?.data?.withdraw_wallet && entry?.data?.withdraw_wallet,
-              type_pnl:      entry?.data?.type_pnl && entry?.data?.type_pnl,
-              rem:           entry?.data?.rem && entry?.data?.rem,
-              enabled:       entry?.data?.enabled && entry?.data?.enabled
+              position:     entry?.data?.position && entry?.data?.position,
+              rem:          entry?.data?.rem && entry?.data?.rem,
+              enabled:      entry?.data?.enabled && entry?.data?.enabled
             },
                 mode: 'onChange'
             });
@@ -66,21 +60,24 @@ className="modal fade show " >
               </div>
               <div className="col-sm-4">
                     <div class="input-group input-group-dynamic is-filled my-3 ">
-                        <label class="form-label">Дата рождения</label>
-                        <input
-                        {...register('birth_date')}
-                      type="email" class="form-control"/>
+                      <label class="form-label">Телефон</label>
+                      <input 
+                        {...register('phone_int', {
+                          required:'Укажите мобильный телефон',
+                          maxLength: 15
+                      })}
+                      type="text" class="form-control"/>
                     </div>
               </div>      
               <div className="col-sm-4">
                     <div class="input-group input-group-dynamic is-filled my-3 ">
-                      <label class="form-label">Телефон</label>
+                      <label class="form-label">Телефон моб.</label>
                       <input 
                         {...register('phone_mob', {
                           required:'Укажите мобильный телефон',
                           maxLength: 15
                       })}
-                      type="email" class="form-control"/>
+                      type="text" class="form-control"/>
                     </div>
               </div>            
             </div>
@@ -99,7 +96,7 @@ className="modal fade show " >
               <div className="col-sm-4">
                   <div class="input-group input-group-dynamic is-filled my-3 ">
                      <label class="form-label">Пароль</label>
-                     <input {...register('passwd')} 
+                     <input {...register('password')} 
                      type="password" class="form-control"/>
                   </div>
               </div>
@@ -116,61 +113,13 @@ className="modal fade show " >
             <div className="row">              
               <div className="col-sm-4">
                   <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Сеть ввода</label>
+                     <label class="form-label">Должность</label>
                      <input 
-                     {...register('deposit_net')} 
+                     {...register('position')} 
                      type="email" class="form-control"/>
                   </div>
               </div>
-              <div className="col-sm-8">
-                  <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Кошелек ввода</label>
-                     <input 
-                     {...register('deposit_wallet')} 
-                     type="email" class="form-control"/>
-                  </div>
-              </div>
-            </div>
-            <div className="row">              
-              <div className="col-sm-4">
-                  <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Сеть вывода </label>
-                     <input 
-                     {...register('withdraw_net')} 
-                     type="email" class="form-control"/>
-                  </div>
-              </div>
-              <div className="col-sm-8">
-                  <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Кошелек вывода</label>
-                     <input 
-                     {...register('withdraw_wallet')} 
-                     type="email" class="form-control"/>
-                  </div>
-              </div>
-            </div>
-            <div className="row">
-               <div className="col-sm-4">
-                  <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Задать баланс вручную </label>
-                     <input 
-                     {...register('balance')} 
-                     type="number" class="form-control"/>
-                  </div>
-                </div>
-                <div className="col-sm-4">
-                  <div class="input-group input-group-dynamic is-filled my-3 ">
-                     <label class="form-label">Тип PNL</label>
-                     <select className="form-control"                                        
-                                        {...register('type_pnl', {
-                                        required:'Укажите тип PNL'
-                                        })}>                        
-                      <option value={1} >Фиксированный</option>                                       
-                      <option value={2} >Колеблющийся</option>       
-                      </select>
-                  </div>
-                </div>
-            </div>
+            </div>            
             <div className="row">
               <div className="col-sm-12">
                 <div class="input-group input-group-dynamic">
@@ -179,8 +128,7 @@ className="modal fade show " >
                     class="multisteps-form__textarea form-control" rows="5" placeholder="Примечание..." />
                   </div>
               </div>
-            </div>
-         
+            </div>         
             <div className="row">
             <div class="form-check form-check-info text-left">
               <br/>
