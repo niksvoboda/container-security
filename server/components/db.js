@@ -1,12 +1,13 @@
 const mysql = require("mysql2");
 const config = require("config");
-const console_log   = require('../components/console_log');
+const Log   = require('../components/log');
 /**
  * Класс для доступа к БД
  */
-class Db {
+class Db extends Log{
     name = "Db";
     constructor(){
+        super();
         this.poolConnections = this.createPool(
             config.get('db.host'),            
             config.get('db.port'),

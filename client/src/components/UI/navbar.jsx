@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { aside_menu } from '../../utils/aside_menu';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { TranslateContext } from '../../contex/index';
 
 const Navbar = () => {
-
+  const {translate} = useContext(TranslateContext)
   const location = useLocation()
+
   const currentItem = aside_menu.filter(menuitem => menuitem.link === location.pathname);
   const [breadcrumb, set_breadcrumb] = useState('')
   useEffect(() => {
-    set_breadcrumb ('CS Monitor / '+ currentItem[0].name);
+    set_breadcrumb ( `${translate('left_menu.app_name')}  /  ${translate(currentItem[0].name)}` );
    }, [currentItem]);
 
     return (

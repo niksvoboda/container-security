@@ -16,7 +16,7 @@ const sha512    = require('js-sha512');
 const expires_in    = config.get("auth.accessTokenExpTime");
 const secret_key    = config.get("auth.secret_key");
 const max_attempts  = config.get("auth.max_attempts");
-const version       =  config.get("version");
+const version       = config.get("version");
 
 
 const generateToken = (id, username, login, role, permissions) =>{

@@ -1,16 +1,18 @@
-const Users  = require("../models/_users"); 
-const Roles  = require("../models/_roles");
+const Users     = require("../models/_users"); 
+const Roles     = require("../models/_roles");
 const Passwords = require("../models/_passwords.js");
 const Settings  = require("../models/_settings");
 const sha512    = require('js-sha512');
+const Log       = require('../components/log');
     /**
      * Класс данных для страницы заказчиков
      */
-class Api_Users  {
+class Api_Users extends Log  {
         
     name = "Api_Users";
-
-    async getEntrys(req, res) {        
+   
+    async getEntrys(req, res) {   
+        self.green("getEntrys");
         try {
         const {start, length, search} = req.query;
       //  console.log(start, length, search)
@@ -29,6 +31,7 @@ class Api_Users  {
 
     /** Для формы редактирования */
     async getEntry(req, res) {
+    self.green("getEntry");
     try {
         const {id} = req.query
       //  console.log(id)
@@ -57,6 +60,7 @@ class Api_Users  {
     }
 
     async addEntry(req, res) {
+        self.green("addEntry");
     try {
         const {data} = req.body.params
         let response = {
@@ -97,6 +101,7 @@ class Api_Users  {
     }
 
     async updateEntry(req, res) {
+        self.green("updateEntry");
     try {
         const {data ,id} = req.body.params
         console.log(data ,id )
@@ -169,6 +174,7 @@ class Api_Users  {
     }
 
     async deleteEntry(req, res) {
+        self.green("deleteEntry");
     try {
         const {id} = req.body.params
         let response = {
@@ -191,4 +197,5 @@ class Api_Users  {
     }
 }
 
-module.exports = new Api_Users();
+const self = new Api_Users();
+module.exports = self;

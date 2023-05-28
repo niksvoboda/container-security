@@ -1,0 +1,18 @@
+{
+    "left_menu":{
+        "app_name":"Монитор уязвимостей",
+        "dashboards":"Панель управления",
+        "vulnerabilities":"Уязвимости",
+        "bestpractice":"Лучшие практики",
+        "scheduledjobs":"Расписание проверок",
+        "settings":"Настройки",
+        "reports":"Отчеты",
+        "logout":"Выход"
+    },
+    "dashboards":{
+        "1":"",
+        "2":"",
+        "3":"",
+        "4":""
+    }   
+}

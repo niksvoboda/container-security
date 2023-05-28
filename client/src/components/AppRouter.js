@@ -22,7 +22,7 @@ const publicRoutes = [
         {path: '*', element: <Navigate to="/login" replace/>}
         ]
 const authRoutes = [
-            {path: MAIN_ROUTE, element: <Tpl_main page = {<Users/>}/>},
+            {path: MAIN_ROUTE, element: <Tpl_main page = {<Dashboard/>}/>},
             
             {path: BESTPRACTICE_ROUTE, element: <Tpl_main page = {<Bestpractice/>}/>},
             

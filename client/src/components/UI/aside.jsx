@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { aside_menu } from '../../utils/aside_menu';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { TranslateContext } from '../../contex/index';
 
 const Aside = () => {
 //console.log(aside_menu)
 //Обслуживаем title страницы 
+  const {translate} = useContext(TranslateContext)
    const location = useLocation()
    const currentItem = aside_menu.filter(menuitem => menuitem.link === location.pathname);
    useEffect(() => {
-      document.title =  'CS Monitor  / '+ currentItem[0].name;
+      document.title = `${translate('left_menu.app_name')}  /  ${translate(currentItem[0].name)}`;
     }, [currentItem]);
     return (
         
@@ -17,7 +19,7 @@ const Aside = () => {
       <i className="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" ></i>
       <a className="navbar-brand m-0" >
         <img src="../assets/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo"/>
-        <span className="ms-1 font-weight-bold text-white">CS Monitor</span>
+        <span className="ms-1 font-weight-bold text-white">{translate('left_menu.app_name')}</span>
       </a>
     </div>
     <hr className="horizontal light mt-0 mb-2"/>
@@ -31,7 +33,7 @@ const Aside = () => {
                <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
                  <i className="material-icons opacity-10">{item.icon}</i>
                </div>
-               <span className="nav-link-text ms-1">{item.name}</span>
+               <span className="nav-link-text ms-1">{translate(item.name)}</span>
              </Link>
            </li>
         )}        

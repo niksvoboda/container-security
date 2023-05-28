@@ -202,37 +202,37 @@ return (<>
                 <table className="table table-flush dataTable-table" id="datatable-search">
                    <thead className="thead-light">
                    <tr>
-                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
                         </th>                
-                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >ФИО
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >ФИО
                         </th>                 
-                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Логин
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Логин
                         </th>
-                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >E-mail
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >E-mail
                         </th>
-                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Создан
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Создан
                         </th>                 
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i class="material-icons">edit</i>
+                        <i className="material-icons">edit</i>
                         </th>                   
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i class="material-icons">delete</i>
+                        <i className="material-icons">delete</i>
                         </th>
                   </tr>
                    </thead>
                    <tbody>
                    {content?.map(entry=><tr key={String(entry.user_id)}>
-                        <td class="text-sm font-weight-normal">{entry.user_id}</td>
-                        <td class="text-sm font-weight-normal">{entry.username}</td>
-                        <td class="text-sm font-weight-normal">{entry.login}</td>
-                        <td class="text-sm font-weight-normal">{entry.email}</td>
-                        <td class="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
-                        <td class="text-sm font-weight-normal">
-                           <i class="material-icons cursor-pointer" title="Редактировать пользователя" 
+                        <td className="text-sm font-weight-normal">{entry.user_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.username}</td>
+                        <td className="text-sm font-weight-normal">{entry.login}</td>
+                        <td className="text-sm font-weight-normal">{entry.email}</td>
+                        <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
+                        <td className="text-sm font-weight-normal">
+                           <i className="material-icons cursor-pointer" title="Редактировать пользователя" 
                            onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
                            </td>                       
-                        <td class="text-sm font-weight-normal">
-                           <i class="material-icons cursor-pointer" title="Удалить пользователя" 
+                        <td className="text-sm font-weight-normal">
+                           <i className="material-icons cursor-pointer" title="Удалить пользователя" 
                            onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
                            </td>
                       </tr>)}

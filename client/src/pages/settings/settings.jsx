@@ -25,18 +25,18 @@ const Settings = () => {
     return (
 <>
 <div className="container-fluid ">
-   <div class="row gx-4 mb-3"  >    
-      <div class="col-auto my-sm-auto mt-1" >
-         <div class="nav-wrapper position-relative  end-0 ">
-            <ul class="nav nav-pills nav-fill p-1 flex-row hook_settings_nav"  >
+   <div className="row gx-4 mb-3"  >    
+      <div className="col-auto my-sm-auto mt-1" >
+         <div className="nav-wrapper position-relative  end-0 ">
+            <ul className="nav nav-pills nav-fill p-1 flex-row hook_settings_nav"  >
                 {settings_menu.map(p=>
                      <li 
-                     class={settings_menu.indexOf(p) == menu_item? 'nav-item hook_settings_li hook_sm_active' : 'nav-item hook_settings_li'}
+                     className={settings_menu.indexOf(p) == menu_item? 'nav-item hook_settings_li hook_sm_active' : 'nav-item hook_settings_li'}
                      onClick={event=>set_menu_item(settings_menu.indexOf(p))}
                      >
-                     <a class="nav-link mb-0 px-0 py-1">
-                     <i class={p.icon}></i>
-                     <span class="ms-1">{p.name}</span>
+                     <a className="nav-link mb-0 px-0 py-1">
+                     <i className={p.icon}></i>
+                     <span className="ms-1">{p.name}</span>
                      </a>
                   </li>
                 )}
