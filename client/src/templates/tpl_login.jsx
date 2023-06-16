@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { UserContext } from '../contex';
 import { login, logout } from "../http/auth_user";
 import { useSnackbar } from 'react-simple-snackbar';
-import { option_green_snackbar, option_red_snackbar } from '../components/UI/Snackbar';
+import { option_green_snackbar, option_red_snackbar } from '../components/UI/kit/Snackbar';
 
 const Tpl_login = () => {
 const now_year = new Date().getFullYear();

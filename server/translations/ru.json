@@ -1,4 +1,24 @@
-{
+{   "common":{
+        "columns":{
+            "name":"ФИО",
+            "login":"Логин",
+            "email":"Почта",
+            "created":"Создание",
+            "changed":"Изменение"
+        },
+        "ui_kit":{
+            "pagenumbers":{
+                "records_from":"Записи с",
+                "to":"по",
+                "from":"из",
+                "records":"записей",
+                "not_found":"Записей не найдено... "
+            },
+            "searchinput":{
+                "search":"Поиск..."
+            }
+        }
+    }, 
     "left_menu":{
         "app_name":"Монитор уязвимостей",
         "dashboards":"Панель управления",
@@ -9,10 +29,55 @@
         "reports":"Отчеты",
         "logout":"Выход"
     },
-    "dashboards":{
-        "1":"",
+    "scheduledjobs":{        
+        "add_entry":"Добавить задание",
+        "edit_entry":"Редактировать задание",
+        "delete_entry":"Удалить задание"        
+    }, 
+    "dashboard":{
+        "common":{
+            "title":"Общие показатели",
+            "containers":"Контейнеры",
+            "container_images":"Образы контейнеров",
+            "hosts":"Хостов",
+            "orchestrator":"Оркестраторов"
+        },
+        "col_1":{ 
+            "title":"Столбец 1",
+            "most_exploitable":{
+                "title":"Наиболее эксплуатируемые уязвимости",
+                "total":"Всего",
+                "critical":"Критичных",
+                "high":"Высоких",
+                "medium":"Средних",
+                "low":"Низких"
+            },
+            "most_vulnerable_containers":"Наиболее уязвимые работающие контейнеры",
+            "most_vulnerable_hosts":"Наиболее уязвимые хосты",
+            "hosts":"Хостов",
+            "orchestrator":"Оркестраторов"
+        },
+        "col_2":{
+            "title":"Столбец 2",
+            "most_not_match":"Наиболее не соотв. практикам",
+            "found_secrets":"Найдено секретов",
+            "common_score":"Общая оценка %"
+        },
+        "col_3":{  
+            "title":"Столбец 3 - Наши метрики",
+            "most_exploitable":"Наиболее эксплуатируемые уязвимости",
+            "most_vulnerable_containers":"Наиболее уязвимые работающие контейнеры",
+            "most_vulnerable_hosts":"Наиболее уязвимые хосты"
+        }
+    },
+    "settings":{
+        "users":{
+            "add_entry":"Добавить пользователя",
+            "edit_entry":"Редактировать пользователя",
+            "delete_entry":"Удалить пользователя"
+        },
         "2":"",
         "3":"",
         "4":""
-    }   
+    }      
 }

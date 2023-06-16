@@ -44,7 +44,7 @@ class AuthController{
             /** получаем логин и пароль */
             const {email, password} = req.body
             /** если пользователя с таким логином нет то возвращаем информацию об этом */
-            //console.log(email, password)
+            console.log(email, password)
             let user = await Users.getUserByLoginWithRole(email);
             user = user[0]
            // console.log(JSON.parse(user?.permissions).max_attempts)
@@ -96,6 +96,8 @@ class AuthController{
             }
            
             if (user && user?.enabled && passwd_check)  {
+              //  console.log(user, user?.enabled, passwd_check)
+              //  console.log(JSON.parse( user.permissions))
                  /** Если пароль правильный - генерируем и возращаем JWT-токен */
                 const token =  generateToken(user.user_id, user.username, user.login, user.role_id, user.permissions)
                 /** Логируем */
@@ -109,7 +111,7 @@ class AuthController{
 
                 return res.json(token)
             } else {
-                
+               // console.log(user, user?.enabled, passwd_check)
                 return res.status(400).json({message: 'Неправильный пароль или пользователь не найден2'})
             } 
         } catch (e) {
@@ -118,16 +120,6 @@ class AuthController{
         } 
     }
 
-    async check(req, res, next){
-        try{
-            const token = generateToken(user._id, user._roles)
-            return res.json({token})
-        }
-        catch (e) {
-            console.log(e)
-            res.status(400).json({message: 'Ошибка проверки: '+ e})
-        }
-    }
     
     async logout(req, res, next){
       

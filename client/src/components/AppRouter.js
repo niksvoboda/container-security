@@ -22,23 +22,15 @@ const publicRoutes = [
         {path: '*', element: <Navigate to="/login" replace/>}
         ]
 const authRoutes = [
-            {path: MAIN_ROUTE, element: <Tpl_main page = {<Dashboard/>}/>},
-            
-            {path: BESTPRACTICE_ROUTE, element: <Tpl_main page = {<Bestpractice/>}/>},
-            
-            {path: DASHBOARD_ROUTE, element: <Tpl_main page = {<Dashboard/>}/>},
-            
-            {path: REPORTS_ROUTE, element: <Tpl_main page = {<Reports/>}/>},
-            
-            {path: SCHEDULEDJOBS_ROUTE, element: <Tpl_main page = {<Scheduledjobs/>}/>},
-            
-            {path: SETTINGS_ROUTE, element: <Tpl_main page = {<Settings/>}/>},
-            
+            {path: MAIN_ROUTE,            element: <Tpl_main page = {<Dashboard/>}/>},            
+            {path: BESTPRACTICE_ROUTE,    element: <Tpl_main page = {<Bestpractice/>}/>},            
+            {path: DASHBOARD_ROUTE,       element: <Tpl_main page = {<Dashboard/>}/>},            
+            {path: REPORTS_ROUTE,         element: <Tpl_main page = {<Reports/>}/>},            
+            {path: SCHEDULEDJOBS_ROUTE,   element: <Tpl_main page = {<Scheduledjobs/>}/>},            
+            {path: SETTINGS_ROUTE,        element: <Tpl_main page = {<Settings/>}/>},            
             {path: VULNERABILITIES_ROUTE, element: <Tpl_main page = {<Vulnerabilities/>}/>},
-
-            {path: LOGOUT_ROUTE, element: <Tpl_main page = {<LogoutPage/>}/>},
-
-            {path: '*', element: <Navigate to="/" replace/>}
+            {path: LOGOUT_ROUTE,          element: <Tpl_main page = {<LogoutPage/>}/>},
+            {path: '*',                   element: <Navigate to={MAIN_ROUTE} replace/>}
       ]
  return(
          <>

@@ -1,4 +1,4 @@
-const db       = require("../components/db.js");
+const db       = require("../components/db_pg.js");
 
 /** Модель без процедур, с парметризацией, защищена от SQL иньекций */
 class Passwords {

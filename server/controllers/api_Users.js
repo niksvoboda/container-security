@@ -15,7 +15,6 @@ class Api_Users extends Log  {
         self.green("getEntrys");
         try {
         const {start, length, search} = req.query;
-      //  console.log(start, length, search)
         const result = await Users.getEntrys(search);
           let response = {
             status: "OK",
@@ -31,10 +30,9 @@ class Api_Users extends Log  {
 
     /** Для формы редактирования */
     async getEntry(req, res) {
-    self.green("getEntry");
+        self.green("getEntry");
     try {
         const {id} = req.query
-      //  console.log(id)
         if (id) {
             let user = await Users.getEntry(id);
             const users_roles =   await Roles.getEntrys('')

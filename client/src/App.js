@@ -47,6 +47,7 @@ function App() {
     }
     if (decode?.id) {
        setUser({id:decode.id, username: decode.username, login: decode.login, permissions: JSON.parse(decode.permissions),  isAuth: true})
+       console.log(JSON.parse(decode.permissions))
     }   
   },[])
   return (

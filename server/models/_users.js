@@ -1,12 +1,12 @@
-const db       = require("../components/db.js");
-const Log       = require('../components/log');
+const db    = require("../components/db_pg.js");
+const Log   = require('../components/log');
 class Users extends Log {
     name = "Users";
     saltRounds = 10;
 
     async getUserByLoginWithRole(login) {
         self.blue('getUserByLoginWithRole')
-        const res = await db.asyncQuery("SELECT *, `tbl_users_roles`.permissions AS permissions FROM `tbl_users`  INNER JOIN `tbl_users_roles` ON tbl_users_roles.role_id = tbl_users.role_id WHERE login=(?)", [ login ]);
+        const res = await db.asyncQuery('SELECT *, tbl_users_roles.permissions AS permissions FROM tbl_users INNER JOIN tbl_users_roles ON tbl_users_roles.role_id = tbl_users.role_id WHERE login=$1', [ login ]);
         return res ? res : null;
     }
    
@@ -14,15 +14,15 @@ class Users extends Log {
         self.blue("getEntrys")
         search = '%' + search + '%';
         let result = await db.asyncQuery(`SELECT * FROM tbl_users 
-        WHERE username LIKE (?)
-        OR login LIKE (?)
-        OR position LIKE (?)`, [search, search, search]);
+        WHERE username LIKE $1
+        OR login LIKE $2
+        OR position LIKE $3`, [search, search, search]);
         return result;
     }
  
     async getEntry(id) {
         self.blue("getEntry")
-        let result = await db.asyncQuery("SELECT * FROM tbl_users WHERE user_id = (?)", [id]);
+        let result = await db.asyncQuery("SELECT * FROM tbl_users WHERE user_id = $1", [id]);
         return result;
     }
 

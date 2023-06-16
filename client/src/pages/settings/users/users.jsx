@@ -1,19 +1,20 @@
 import React, { useState ,useEffect, useContext} from 'react';
 import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_users";
-import Pagenumbers from '../../../components/UI/pagenumbers';
-import { Pagination } from '../../../components/UI/pagination';
-import { Select } from "../../../components/UI/select";
+import Pagenumbers from '../../../components/UI/kit/pagenumbers';
+import { Pagination } from '../../../components/UI/kit/pagination';
+import { Select } from "../../../components/UI/kit/select";
 import date_format  from "dateformat";
-import Searchinput from '../../../components/UI/searchinput';
+import Searchinput from '../../../components/UI/kit/searchinput';
 import { Modal } from './modal';
 import { ModalDelete } from './modal_delete';
 import { useSnackbar } from 'react-simple-snackbar'
-import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/Snackbar';
-import { UserContext } from '../../../contex';
+import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/kit/Snackbar';
+import { UserContext, TranslateContext } from '../../../contex';
 
 const Users = () => {
 /** Ролевая модель */
 const {user} = useContext(UserContext)
+const {translate} = useContext(TranslateContext)
 /** Всплывающее сообщение */
 const [openGreen, closeGreen] = useSnackbar(option_green_snackbar)
 const [openRed, closeRed] = useSnackbar(option_red_snackbar)
@@ -194,7 +195,7 @@ return (<>
                 <button 
                 onClick={e=>open_create_Entry()}
                 type="button" className="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
-                   Добавить пользователя
+                   {translate('settings.users.add_user')}
                 </button>
                 </div>
              </div>
@@ -204,13 +205,13 @@ return (<>
                    <tr>
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
                         </th>                
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >ФИО
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.name')}
                         </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Логин
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.login')}
                         </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >E-mail
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.email')}
                         </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Создан
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}
                         </th>                 
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
                         <i className="material-icons">edit</i>
@@ -228,11 +229,11 @@ return (<>
                         <td className="text-sm font-weight-normal">{entry.email}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
                         <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title="Редактировать пользователя" 
+                           <i className="material-icons cursor-pointer" title={translate('settings.users.edit_user')} 
                            onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
                            </td>                       
                         <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title="Удалить пользователя" 
+                           <i className="material-icons cursor-pointer" title={translate('settings.users.delete_user')} 
                            onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
                            </td>
                       </tr>)}

@@ -36,6 +36,25 @@
  .mt-6{
      margin-top: 30px;
  }
+
+.m-1{
+    margin: 2px;
+}
+.m-2{
+    margin: 4px;
+}
+.m-3{
+    margin: 6px;
+}
+.m-4{
+    margin: 8px;
+}
+.m-5{
+    margin: 10px;
+}
+.m-6{
+    margin: 12px;
+}
  
  .pd-1{
      padding: 2px;
@@ -58,4 +77,8 @@
  
  .cursor{
      cursor:pointer;
+ }
+
+ .bb-1{
+    border-bottom: 1px solid #464646;
  }

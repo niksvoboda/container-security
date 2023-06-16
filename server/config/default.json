@@ -2,8 +2,8 @@
   "version": "v1.0.0",
 
   "server": {
-    "port": 3000,
-    "port_ssl": 3001
+    "port": 3004,
+    "port_ssl": 3005
   },
 
   "auth": { 
@@ -17,9 +17,19 @@
     "console" : "true"
   },
 
-  "home": "/",
+  "home": "/",  
 
-  "db": {
+  "db_pg": {    
+    "user": "postgres",
+    "host": "127.0.0.1",
+    "database": "postgres",
+    "password": "root",
+    "port": 5433,
+    "connectionLimit": 100,
+    "idleTimeout": 30000
+  },
+
+  "db_maria": {
     "connectionLimit": 100,
     "host": "127.0.0.1",
     "user": "root",
