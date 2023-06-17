@@ -103,7 +103,7 @@ useEffect(()=>{
            if (result?.status === "OK") {
             openGreen(result?.message)
              /** Если запрос успешен закрываем форму и обнуляем ENTRY_ID */
-             exit()
+           //  exit()
              } else {
             openRed(result?.message)
              }
@@ -195,7 +195,7 @@ return (<>
                 <button 
                 onClick={e=>open_create_Entry()}
                 type="button" className="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
-                   {translate('settings.users.add_user')}
+                   {translate('settings.users.add_entry')}
                 </button>
                 </div>
              </div>

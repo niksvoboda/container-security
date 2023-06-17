@@ -9,7 +9,9 @@ const $authHost = axios.create({
 })
 
 const authInterceptor = config => {
-    config.headers.authorization = 'Bearer ' + localStorage.getItem('token')
+    //если есть токен в сессион сторадже берем его, если нет ищем в локалсторадже
+    let token =  sessionStorage.getItem('token')?.length > 0?  sessionStorage.getItem('token') : localStorage.getItem('token')   
+    config.headers.authorization = 'Bearer ' + token
     return config
 }
 
@@ -21,7 +23,9 @@ $authHost.interceptors.response.use(function (response) {
     /** Разлогиниваем фронт если мидлваре сервера не принял токен */
     if (error.response.status == 401){
         console.log('status 401')
-        window.location.href="/logout"
+        localStorage.setItem('token', ''); 
+        sessionStorage.setItem('token', ''); 
+        window.location.href="/"
     }
     // Любые коды состояния, выходящие за пределы диапазона 2xx, вызывают срабатывание этой функции
     // Здесь можете сделать что-то с ошибкой ответа

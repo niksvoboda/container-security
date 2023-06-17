@@ -6,7 +6,7 @@ class Api_Roles extends Log {
     name = "Api_Roles";
     async getEntrys(req, res){
         try {
-            self.d(".getEntrys");
+            self.green(".getEntrys");
             const {start, length, search} = req.query;
             /** Получаем и формируем страницу */
             const result = await Roles.getEntrys(search);
@@ -15,6 +15,12 @@ class Api_Roles extends Log {
               data: result.slice(Number(start), Number(start)+Number(length)),
               total_entrys: result?.length,            
               }
+              if (result[0]?.code?.length > 0 ) {
+                response = {
+                    status: "ERROR",
+                    message: String(result[0].message)
+                }
+                }
               return res.status(200).json(response)
         } catch (error) {
             console.log(error)
@@ -24,13 +30,19 @@ class Api_Roles extends Log {
 
     async getEntry(req, res){
         try{
-            self.d(".getRole");
-            const {role_id} = req.query;
-            const user_role =   await roles.getRoleById(role_id)
-            const response = {
+            self.green(".getRole");
+            const {id} = req.query;
+            const result =   await Roles.getEntry(id)
+            let response = {
                 status: "OK",
-                role: user_role,
+                data: result,
             };
+            if (result[0]?.code?.length > 0 ) {
+                response = {
+                    status: "ERROR",
+                    message: String(result[0].message)
+                }
+            }
             return res.status(200).json(response)
         } catch (error){
             console.log(error)
@@ -40,70 +52,51 @@ class Api_Roles extends Log {
 
     async addEntry(req, res){
         try{
-            self.d(".saveRole");
-            let creator_id = 1;
-            const {role} = req.body.params;
-            /** Чистим и обезапашиваем входящий массив разрешений */
-            let permissions =  {
-                changes_read:           role.changes_read,
-                changes_read_all:       role.changes_read_all,
-                monitoring_read:        role.monitoring_read,
-                groups_read:            role.groups_read,
-                logs_read:              role.logs_read,
-                objects_read:           role.objects_read,
-                users_read:             role.users_read,
-                groups_edit:            role.groups_edit,
-                monitoring_edit:        role.monitoring_edit,
-                objects_edit:           role.objects_edit,
-                users_edit:             role.users_edit,
-                contacts_read:          role.contacts_read,
-                contacts_edit:          role.contacts_edit,
-                settings_nagios_read:   role.settings_nagios_read,
-                settings_nagios_edit:   role.settings_nagios_edit,
-                settings_ssl_read:      role.settings_ssl_read,
-                settings_ssl_edit:      role.settings_ssl_edit,
-                settings_places_read:   role.settings_places_read,
-                settings_places_edit:   role.settings_places_edit,
-                settings_os_read:       role.settings_os_read,
-                settings_os_edit:       role.settings_os_edit,
-                settings_div_read:      role.settings_div_read,
-                settings_div_edit:      role.settings_div_edit,
-                settings_commands_read: role.settings_commands_read,
-                settings_commands_edit: role.settings_commands_edit,
-                settings_roles_read:    role.settings_roles_read,
-                settings_roles_edit:    role.settings_roles_edit,
-                requests_alert_read:    role.requests_alert_read,
-                requests_self_read:     role.requests_self_read,
-                requests_self_edit:     role.requests_self_edit,
-                requests_read:          role.requests_read,
-                requests_edit:          role.requests_edit,
-                max_attempts:           role.max_attempts,
+            self.green(".addEntry");
+            let creator_id = req.user_data.id;
+            const {data} = req.body.params;
+            /** Чистим и обезопашиваем входящий массив разрешений */
+            let permissions =  {              
+                dashboards_read:        data.dashboards_read,        
+                dashboards_edit:        data.dashboards_edit,
+                vulnerabilities_read:   data.vulnerabilities_read ,              
+                vulnerabilities_edit:   data.vulnerabilities_edit,
+                bestpractice_read:      data.bestpractice_read ,              
+                bestpractice_edit:      data.bestpractice_edit ,
+                scheduledjobs_read:     data.scheduledjobs_read,              
+                scheduledjobs_edit:     data.scheduledjobs_edit ,
+                settings_read:          data.settings_read,              
+                settings_edit:          data.settings_edit,
+                reports_read:           data.reports_read,              
+                reports_edit:           data.reports_edit,
             }
-            console.log(role)
+            console.log(data)
             let response = {
                 status: "OK"
             }
             /**Проверяем есть ли такой пользователь в базе */
-            const user_role =   await roles.getRoleByTitle(role.title)
-            if (user_role) {
+            const user_role =   await Roles.getRoleByTitle(data.title)
+            console.log(user_role)
+            if (user_role?.length>0) {
                 response = {
                     status: "ERROR",
                     message: 'Такая роль уже существует',
                    
                 }
             } else {
-                const result =   await roles.addRole(role.title, JSON.stringify(permissions), creator_id)
+                const result =   await Roles.addEntry(data.title, JSON.stringify(permissions), creator_id)
                 response = {
                     status: "OK",
                     message: 'Роль сохранена'
                 }
                 /**Если запрос с номером ошибки то выдаем ошибку*/
-                if (result?.errno > 0 ) {
-                response = {
-                    status: "ERROR",
-                    message: String(result),
+                if (result[0]?.code?.length > 0 ) {
+                    response = {
+                        status: "ERROR",
+                        message: String(result[0].message),
+                        login: data.login
+                    }
                 }
-            }   
             }
             return res.status(200).json(response)
         } catch (error){
@@ -114,51 +107,26 @@ class Api_Roles extends Log {
 
     async updateEntry(req, res){
         try{
-            self.d(".updateRole");
-             let creator_id = 1;
-            const {role, role_id} = req.body.params;
+            self.green(".updateEntry");
+            let creator_id = req.user_data.id;
+            const {data, id} = req.body.params;
             /** Чистим и обезапашиваем входящий массив разрешений */ 
             let permissions =  {
-                changes_read:           role.changes_read,
-                changes_read_all:       role.changes_read_all,
-                monitoring_read:        role.monitoring_read,
-                groups_read:            role.groups_read,
-                logs_read:              role.logs_read,
-                objects_read:           role.objects_read,
-                users_read:             role.users_read,
-                groups_edit:            role.groups_edit,
-                monitoring_edit:        role.monitoring_edit,
-                objects_edit:           role.objects_edit,
-                users_edit:             role.users_edit,
-                contacts_read:          role.contacts_read,
-                contacts_edit:          role.contacts_edit,
-                settings_nagios_read:   role.settings_nagios_read,
-                settings_nagios_edit:   role.settings_nagios_edit,
-                settings_ssl_read:      role.settings_ssl_read,
-                settings_ssl_edit:      role.settings_ssl_edit,
-                settings_places_read:   role.settings_places_read,
-                settings_places_edit:   role.settings_places_edit,
-                settings_os_read:       role.settings_os_read,
-                settings_os_edit:       role.settings_os_edit,
-                settings_div_read:      role.settings_div_read,
-                settings_div_edit:      role.settings_div_edit,
-                settings_commands_read: role.settings_commands_read,
-                settings_commands_edit: role.settings_commands_edit,
-                settings_roles_read:    role.settings_roles_read,
-                settings_roles_edit:    role.settings_roles_edit,
-                requests_alert_read:    role.requests_alert_read,
-                requests_read_all:      role.requests_read_all,
-                requests_edit_all:      role.requests_edit_all,
-                requests_read:          role.requests_read,
-                requests_edit:          role.requests_edit,
-                objects_read_all:       role.objects_read_all,
-                objects_edit_all:       role.objects_edit_all,
-                max_attempts:           role.max_attempts,                
-                settings_passwd_read:   role.settings_passwd_read,
-                settings_passwd_edit:   role.settings_passwd_edit
+                dashboards_read:        data.dashboards_read,        
+                dashboards_edit:        data.dashboards_edit,
+                vulnerabilities_read:   data.vulnerabilities_read ,              
+                vulnerabilities_edit:   data.vulnerabilities_edit,
+                bestpractice_read:      data.bestpractice_read ,              
+                bestpractice_edit:      data.bestpractice_edit ,
+                scheduledjobs_read:     data.scheduledjobs_read,              
+                scheduledjobs_edit:     data.scheduledjobs_edit ,
+                settings_read:          data.settings_read,              
+                settings_edit:          data.settings_edit,
+                reports_read:           data.reports_read,              
+                reports_edit:           data.reports_edit,
             }
-
-            const result =   await roles.updateRole(role.title, JSON.stringify(permissions), creator_id, role_id)
+            console.log(data.title, JSON.stringify(permissions), creator_id, id)    
+            const result =   await Roles.updateEntry(data.title, JSON.stringify(permissions), creator_id, id)
             let response = {
                     status: "OK",
                     message: 'Роль сохранена'
@@ -179,21 +147,21 @@ class Api_Roles extends Log {
 
     async deleteEntry(req, res){
         try{
-            self.d(".deleteEntry");
-            let creator_id = 1; 
-            const {role_id} = req.body.params;
-            const result =   await roles.deleteRole(role_id)
+            self.green(".deleteEntry");            
+            const {id} = req.body.params;
+            const result =   await Roles.deleteEntry(id)
             let response = {
                     status: "OK",
                     message: 'Роль удалена'
                 }
             /**Если запрос с номером ошибки то выдаем ошибку*/
-            if (result?.errno > 0 ) {
+            if (result[0]?.code?.length > 0 ) {
                 response = {
                     status: "ERROR",
-                    message: String(result),
+                    message: String(result[0].message),
+                    login: data.login
                 }
-            }            
+            }          
             return res.status(200).json(response)
         } catch (error){
             console.log(error)

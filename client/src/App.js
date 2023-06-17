@@ -11,7 +11,7 @@ import { fetchTranslate } from './http/api_system';
 function App() {
   const [user, setUser] = useState({username: null, login:'nul1l', isAuth: false, role: 0, permissions:{}})
   /** Мультиязычность */
-  const [lang, set_lang] = useState('ru')
+  const [lang, set_lang] = useState(localStorage.getItem('lang') || 'ru') 
   const [dictionary, set_dictionary] = useState({})
 
   const translate = (phrase) =>{
@@ -50,6 +50,11 @@ function App() {
        console.log(JSON.parse(decode.permissions))
     }   
   },[])
+
+  useEffect(()=>{
+    localStorage.setItem('lang', lang);
+  },[lang])
+
   return (
     <UserContext.Provider value={{
       user,

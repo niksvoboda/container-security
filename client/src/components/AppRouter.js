@@ -2,14 +2,14 @@
 import {Route, Routes, Navigate} from "react-router-dom";
 import React, { useContext } from 'react';
 import { UserContext } from '../contex';
-import {LOGIN_ROUTE, LOGOUT_ROUTE,
+import {LOGIN_ROUTE, LOGOUT_ROUTE, ONJECTS_ROUTE,
       MAIN_ROUTE, BESTPRACTICE_ROUTE, DASHBOARD_ROUTE, REPORTS_ROUTE, SCHEDULEDJOBS_ROUTE,  SETTINGS_ROUTE, VULNERABILITIES_ROUTE} from "../utils/routes";
 import Tpl_login from "../templates/tpl_login";
 import Tpl_main from "../templates/tpl_main";
-import Users from "../pages/settings/users/users";
 import LogoutPage from "../pages/logout_page";
 import Bestpractice from "../pages/bestpractice/bestpractice";
 import Dashboard from "../pages/dashboard/dashboard";
+import Objects from "../pages/objects/objects";
 import Reports from "../pages/reports/reports";
 import Scheduledjobs from "../pages/scheduledjobs/scheduledjobs";
 import Vulnerabilities from "../pages/vulnerabilities/vulnerabilities";
@@ -19,10 +19,11 @@ const AppRouter = () =>{
 const {user} = useContext(UserContext)
 const publicRoutes = [
         {path: LOGIN_ROUTE, element: <Tpl_login />},
-        {path: '*', element: <Navigate to="/login" replace/>}
+        {path: '*', element: <Navigate to={LOGIN_ROUTE} replace/>}
         ]
 const authRoutes = [
-            {path: MAIN_ROUTE,            element: <Tpl_main page = {<Dashboard/>}/>},            
+            {path: MAIN_ROUTE,            element: <Tpl_main page = {<Dashboard/>}/>},           
+            {path: ONJECTS_ROUTE,         element: <Tpl_main page = {<Objects/>}/>},     
             {path: BESTPRACTICE_ROUTE,    element: <Tpl_main page = {<Bestpractice/>}/>},            
             {path: DASHBOARD_ROUTE,       element: <Tpl_main page = {<Dashboard/>}/>},            
             {path: REPORTS_ROUTE,         element: <Tpl_main page = {<Reports/>}/>},            

@@ -31,3 +31,11 @@
 .hook_sidenav{
     z-index: 9 !important;
 }
+
+.settings-card{
+    min-height: calc(100vh - 135px);    
+}
+
+.height-card{
+    min-height: calc(100vh - 77px);    
+}

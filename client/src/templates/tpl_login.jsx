@@ -4,37 +4,43 @@ import jwt_decode from "jwt-decode";
 import { UserContext } from '../contex';
 import { login, logout } from "../http/auth_user";
 import { useSnackbar } from 'react-simple-snackbar';
+import { useForm } from "react-hook-form"
 import { option_green_snackbar, option_red_snackbar } from '../components/UI/kit/Snackbar';
 
 const Tpl_login = () => {
 const now_year = new Date().getFullYear();
+/** Создаем форму если запись указана то подставляем данные */    
+const {register, handleSubmit, formState:{errors}, setValue } = useForm({ defaultValues:{ }, mode: 'onChange'});
 
-  /** Всплывающее сообщение */
-  const [openGreen, closeGreen] = useSnackbar(option_green_snackbar)
-  const [openRed, closeRed] = useSnackbar(option_red_snackbar)    
-  /** при логине страницы узнаем если пользователь имеет действительный токен то подтягиваем все данные */
-  const {user, setUser} = useContext(UserContext)
-  const navigate = useNavigate();
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('');
-  const logIn = async () => {
-      try{
-           const data = await login(username, password)
-           const decode = jwt_decode(data)
-           if (decode?.id) {
-              localStorage.setItem('token', data);
-              
-              setUser({id:decode.id, username: decode.username, login: decode.login, permissions: JSON.parse(decode.permissions),  isAuth: true})
-           }
-           navigate("/")
-      } catch (e) {
-          openRed(e.response.data.message)
-      } 
+/** Всплывающее сообщение */
+const [openGreen, closeGreen] = useSnackbar(option_green_snackbar)
+const [openRed, closeRed] = useSnackbar(option_red_snackbar)    
+/** при логине страницы узнаем если пользователь имеет действительный токен то подтягиваем все данные */
+const {user, setUser} = useContext(UserContext)
+const navigate = useNavigate();
+const logIn = async (username, password, remember) => {
+  console.log(remember)
+try{
+         const data = await login(username, password)
+         const decode = jwt_decode(data)
+         if (decode?.id) {
+
+          if (remember == true) {
+            localStorage.setItem('token', data);  
+          } else {
+            sessionStorage.setItem('token', data);   
+          }
+
+          setUser({id:decode.id, username: decode.username, login: decode.login, permissions: JSON.parse(decode.permissions),  isAuth: true})
+         }
+    } catch (e) {
+        openRed(e.response.data.message)
+    } 
   }
-
-    const Auth = () =>{
-      setUser({username: null, login:'nul1l', isAuth: true, role: 0, permissions:{}})
-    }
+  const onSubmit = (data) =>{
+      logIn(data.username,  data.password ,  data.remember)
+      console.log(data)
+  }    
 
     return (
 <>
@@ -59,33 +65,31 @@ const now_year = new Date().getFullYear();
               </div>
               <div className="card-body">
                 <form role="form" className="text-start">
-                  <div className="input-group input-group-outline my-3 ">
-                   
+                  <div className="input-group input-group-outline my-3 ">                   
                     <input 
                     type="email" 
                     className="form-control"
                     placeholder="Email"
-                    value = {username}
-                    onChange = {e=> setUsername(e.target.value)}
+                    {...register('username')} 
                     />
                   </div>
-                  <div className="input-group input-group-outline mb-3">
-                  
+                  <div className="input-group input-group-outline mb-3">                  
                     <input 
                     type="password" 
                     className="form-control"
                     placeholder="Password"
-                    value = {password}
-                    onChange = {e=> setPassword(e.target.value)}
+                    {...register('password')} 
                     />
                   </div>
                   <div className="form-check form-switch d-flex align-items-center mb-3">
-                    <input className="form-check-input" type="checkbox" id="rememberMe" />
+                    <input 
+                    {...register('remember')} 
+                    className="form-check-input" type="checkbox" id="rememberMe" />
                     <label className="form-check-label mb-0 ms-3" htmlFor="rememberMe">Запомнить меня</label>
                   </div>
                   <div className="text-center">
                     <button type="button" 
-                    onClick ={e => logIn()}
+                    onClick={handleSubmit(onSubmit)}
                     className="btn bg-gradient-primary w-100 my-4 mb-2">Вход</button>
                   </div>
                   <p className="mt-4 text-sm text-center">

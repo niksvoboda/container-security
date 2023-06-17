@@ -2,8 +2,8 @@
   "version": "v1.0.0",
 
   "server": {
-    "port": 3004,
-    "port_ssl": 3005
+    "port": 3000,
+    "port_ssl": 3001
   },
 
   "auth": { 

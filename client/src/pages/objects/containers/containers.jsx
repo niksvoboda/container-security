@@ -1,5 +1,5 @@
 import React, { useState ,useEffect, useContext} from 'react';
-import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_roles";
+import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_users";
 import Pagenumbers from '../../../components/UI/kit/pagenumbers';
 import { Pagination } from '../../../components/UI/kit/pagination';
 import { Select } from "../../../components/UI/kit/select";
@@ -11,8 +11,7 @@ import { useSnackbar } from 'react-simple-snackbar'
 import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/kit/Snackbar';
 import { UserContext, TranslateContext } from '../../../contex';
 
-const Roles = () => {
-
+const Containers = () => {
 /** Ролевая модель */
 const {user} = useContext(UserContext)
 const {translate} = useContext(TranslateContext)
@@ -151,8 +150,7 @@ useEffect(()=>{
    }
    /** Открываем модальное окно с данными записи, при клике на кнопку подгружаем запись по ID чтобы потом передать ее пропсом*/
 
-    return (
-<>
+return (<>
     {hideDeleteModal?
     <ModalDelete
      entry_id= {entry_id}
@@ -195,9 +193,9 @@ useEffect(()=>{
                 </div>
                 <div className="dataTable-search">   
                 <button 
-                onClick={e=>open_create_Entry()}
+               // onClick={e=>open_create_Entry()}
                 type="button" className="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
-                   {translate('settings.roles.add_entry')}
+                   Добавить контейнеры
                 </button>
                 </div>
              </div>
@@ -207,11 +205,13 @@ useEffect(()=>{
                    <tr>
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
                         </th>                
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.title')}
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.container_id')}
                         </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"  width="100px">{translate('common.columns.changed')}
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.image')}
                         </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"  width="100px">{translate('common.columns.created')}
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.command')}
+                        </th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}
                         </th>                 
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
                         <i className="material-icons">edit</i>
@@ -222,18 +222,19 @@ useEffect(()=>{
                   </tr>
                    </thead>
                    <tbody>
-                   {content?.map(entry=><tr key={String(entry.role_id)}>
-                        <td className="text-sm font-weight-normal">{entry.role_id}</td>
-                        <td className="text-sm font-weight-normal">{entry.title}</td>
-                        <td className="text-sm font-weight-normal">{date_format(entry.changed_dt, mask)}</td>
+                   {false && content?.map(entry=><tr key={String(entry.user_id)}>
+                        <td className="text-sm font-weight-normal">{entry.user_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.username}</td>
+                        <td className="text-sm font-weight-normal">{entry.login}</td>
+                        <td className="text-sm font-weight-normal">{entry.email}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
                         <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title={translate('settings.roles.edit_entry')} 
-                           onClick={event=> open_update_Entry(entry.role_id)} >edit</i>
+                           <i className="material-icons cursor-pointer" title={translate('settings.users.edit_user')} 
+                           onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
                            </td>                       
                         <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title={translate('settings.roles.delete_entry')} 
-                           onClick={event=> open_delete_Entry(entry.role_id)}>delete</i>
+                           <i className="material-icons cursor-pointer" title={translate('settings.users.delete_user')} 
+                           onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
                            </td>
                       </tr>)}
                    </tbody>
@@ -266,4 +267,4 @@ useEffect(()=>{
     );
 };
 
-export default Roles;
+export default Containers;

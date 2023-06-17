@@ -1,10 +1,30 @@
 {   "common":{
         "columns":{
             "name":"ФИО",
+            "title":"Название",
             "login":"Логин",
             "email":"Почта",
             "created":"Создание",
-            "changed":"Изменение"
+            "changed":"Изменение",
+            "partition":"Раздел",
+            "repository":"Репозиторий",
+            "version":"Версия",
+            "image_id":"ID образа",
+            "container_id":"ID контейнера",
+            "image":"Образ",
+            "command":"Комманда"
+        },
+        "buttons":{
+            "cancel":"Отмена",
+            "save":"Сохранить",
+            "no":"Нет",
+            "yes":"Да"            
+        },
+        "modal":{
+            "add":"Добавление",
+            "edit":"Редактирование",
+            "you_sure":"Вы уверены, что хотите удалить?",
+            "attention": "Внимание!"
         },
         "ui_kit":{
             "pagenumbers":{
@@ -22,6 +42,7 @@
     "left_menu":{
         "app_name":"Монитор уязвимостей",
         "dashboards":"Панель управления",
+        "objects":"Объекты",
         "vulnerabilities":"Уязвимости",
         "bestpractice":"Лучшие практики",
         "scheduledjobs":"Расписание проверок",
@@ -29,6 +50,15 @@
         "reports":"Отчеты",
         "logout":"Выход"
     },
+    "objects":{       
+        "menu":{        
+            "images":"Образы",
+            "containers":"Контейнеры"      
+        },
+        
+        "edit_entry":"Редактировать задание",
+        "delete_entry":"Удалить задание"        
+    }, 
     "scheduledjobs":{        
         "add_entry":"Добавить задание",
         "edit_entry":"Редактировать задание",
@@ -75,6 +105,20 @@
             "add_entry":"Добавить пользователя",
             "edit_entry":"Редактировать пользователя",
             "delete_entry":"Удалить пользователя"
+        },
+        "roles":{
+            "add_entry":"Добавить роль",
+            "edit_entry":"Редактировать роль",
+            "delete_entry":"Удалить роль",
+            "modal":{
+                "title":"роли",
+                "dashboards":"Панель управления",
+                "vulnerabilities":"Уязвимости",
+                "bestpractice":"Лучшие практики",
+                "scheduledjobs":"Расписание проверок",
+                "settings":"Настройки",
+                "reports":"Отчеты"
+            }
         },
         "2":"",
         "3":"",

@@ -2,8 +2,13 @@ import React from 'react';
 
 const Jira = () => {
     return (
-        <div>
-            
+        <div className="row">
+        <div className="col-12">
+        <div className="card settings-card"> 
+        
+        Jira
+        </div>
+        </div>
         </div>
     );
 };

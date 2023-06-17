@@ -10,7 +10,7 @@ const Left_menu = () => {
    const location = useLocation()
    const currentItem = aside_menu.filter(menuitem => menuitem.link === location.pathname);
    useEffect(() => {
-      document.title = `${translate('left_menu.app_name')}  /  ${translate(currentItem[0].name)}`;
+      document.title = `${translate('left_menu.app_name')}  /  ${translate(currentItem[0]?.name? currentItem[0]?.name : 'left_menu.app_name')}`;
     }, [currentItem]);
     return (
         

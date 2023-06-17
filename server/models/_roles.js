@@ -9,75 +9,54 @@ class Roles {
      async getEntrys(search) {
         search = '%' + search + '%';
         let result = await db.asyncQuery(`SELECT role_id, title, created_dt, changed_dt FROM tbl_users_roles 
-        WHERE title LIKE (?)`, [search]);
+        WHERE title LIKE $1
+        ORDER BY role_id`, [search]);
         return result;
     }
     /** Для формы редактирования */
     async getEntry(id) {
-        let result = await db.asyncQuery("SELECT * FROM tbl_users_roles WHERE request_id = (?)", [id]);
+        let result = await db.asyncQuery("SELECT * FROM tbl_users_roles WHERE role_id = $1", [id]);
+        return result;
+    }
+    async getRoleByTitle(title) {
+        let result = await db.asyncQuery("SELECT * FROM tbl_users_roles WHERE title = $1", [title]);
         return result;
     }
 
+    
     async addEntry(
-        address,
-        host_id,
-        config_name,
-        service_description,
-        request_type,
-        request_status,
-        contacts,
-        creator_id ) {
-        let result = await db.asyncQuery(`INSERT INTO tbl_requests 
-        (   address,
-            host_id,
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts,
+            title,
+            permissions,
+            creator_id) {
+        let result = await db.asyncQuery(`INSERT INTO tbl_users_roles 
+        (   title,
+            permissions,
             creator_id) 
-        VALUES (?,?,?,?,?,?,?,?)`,
-         [  address,
-            host_id,
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts,
+        VALUES ($1,$2,$3)`,
+         [  title,
+            permissions,
             creator_id]);
         return result;
     }
     async updateEntry(
-        address,
-        host_id,
-        config_name,
-        service_description,
-        request_type,
-        request_status,
-        contacts,
+        title,
+        permissions,
+        creator_id,
         id) {
-        let result = await db.asyncQuery(`UPDATE tbl_requests SET
-            address    = (?),
-            host_id   = (?),
-            config_name  = (?), 
-            service_description  = (?),
-            request_type  = (?),
-            request_status  = (?),
-            contacts  = (?)
-            WHERE request_id = (?)`, [
-            address,
-            host_id,    
-            config_name,
-            service_description,
-            request_type,
-            request_status,
-            contacts, 
+        let result = await db.asyncQuery(`UPDATE tbl_users_roles SET
+            title    = $1,
+            permissions   = $2,
+            creator_id  = $3
+            WHERE role_id = $4`, [
+            title,
+            permissions,
+            creator_id,
             id,
-        ]);
+            ]);
         return result;
     }
     async deleteEntry(id) {
-        let result = await db.asyncQuery("DELETE FROM tbl_requests WHERE request_id = (?)", [id]);
+        let result = await db.asyncQuery("DELETE FROM tbl_users_roles WHERE role_id = $1", [id]);
         return result;
     }
 
