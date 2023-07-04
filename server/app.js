@@ -37,7 +37,7 @@ class App extends Log {
           'Запуск системы ' + config.get("version"),
           '-'.repeat(80)
       ];
-      splash.forEach(line => this.yellow(line));
+      splash.forEach(line => this.yellow(':'+line));
   }
   //Развертываем продакшн сборку фронта
   startClient(){

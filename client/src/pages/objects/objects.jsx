@@ -4,10 +4,8 @@ import Images from './images/images';
 import { Link } from 'react-router-dom';
 import {  TranslateContext } from '../../contex';
 
-
 const Objects = () => {
-   const [menu_item, set_menu_item] = useState(0);
-   
+   const [menu_item, set_menu_item] = useState(1);   
    const {translate} = useContext(TranslateContext)
    const settings_menu = [
       {component:<Containers/>, icon: 'fa fa-address-card', name: 'objects.menu.containers' },       

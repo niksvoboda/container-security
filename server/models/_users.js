@@ -1,5 +1,6 @@
 const db    = require("../components/db_pg.js");
 const Log   = require('../components/log');
+
 class Users extends Log {
     name = "Users";
     saltRounds = 10;
@@ -124,14 +125,12 @@ class Users extends Log {
         self.blue(".setUserPass")
         const res = await db.asyncQuery(`UPDATE tbl_users SET password = $1  WHERE user_id = $2`, 
         [pass, user_id]);
-       // return res.length ? res[0] : res;
     }
 
     async setAttempts(login, attempts ) {
         self.blue(".setAttempts")
         const res = await db.asyncQuery(`UPDATE tbl_users SET attempts = 1  WHERE login = $1`, 
         [login]);
-       // return res.length ? res[0] : res;
     }
 }
 const self  = new Users();

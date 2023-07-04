@@ -53,6 +53,7 @@ class Db extends Log{
                         length: error.length,
                         code: error.code
                         }]
+                  console.log(result) 
                 })            
         return result           
         } catch (error) {            

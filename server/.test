@@ -1,0 +1,6 @@
+//images
+router.get('/images/images', Auth, Api_Images.getEntrys);  
+router.get('/images/image', Auth, Api_Images.getEntry);  
+router.post('/images/image_add', Auth, Api_Images.addEntry);
+router.post('/images/image_update', Auth,  Api_Images.updateEntry);
+router.post('/images/image_delete', Auth,  Api_Images.deleteEntry);

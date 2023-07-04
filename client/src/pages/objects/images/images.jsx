@@ -1,12 +1,13 @@
 import React, { useState ,useEffect, useContext} from 'react';
-import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_users";
+import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../../http/api_images";
 import Pagenumbers from '../../../components/UI/kit/pagenumbers';
 import { Pagination } from '../../../components/UI/kit/pagination';
 import { Select } from "../../../components/UI/kit/select";
 import date_format  from "dateformat";
 import Searchinput from '../../../components/UI/kit/searchinput';
 import { Modal } from './modal';
-import { ModalDelete } from './modal_delete';
+import { Modal_edit } from './modal_edit';
+import {ModalDelete} from '../../../components/UI/kit/modal_delete';
 import { useSnackbar } from 'react-simple-snackbar'
 import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/kit/Snackbar';
 import { UserContext, TranslateContext } from '../../../contex';
@@ -63,6 +64,7 @@ useEffect(()=>{
 
    /** Обслуживаем модальные окна */   
    const [hideModal, set_hideModal] = useState(false)
+   const [hideModal_edit, set_hideModal_edit] = useState(false)
    const [entry_id, set_entry_id] = useState(null)
    const [hideDeleteModal, set_hideDeleteModal] = useState(false)
    const [entry, set_entry] = useState(null)
@@ -80,7 +82,7 @@ useEffect(()=>{
       .then((content) => {
          console.log(content)
          set_entry(content);
-         set_hideModal(true);
+         set_hideModal_edit(true);
          set_entry_id(entry_id);
       }).catch((err) => {console.error(err);})} 
    /** Отправка на создание/редактирование  записи - передаем пропсом в модальное окно */
@@ -103,7 +105,7 @@ useEffect(()=>{
            if (result?.status === "OK") {
             openGreen(result?.message)
              /** Если запрос успешен закрываем форму и обнуляем ENTRY_ID */
-           //  exit()
+             exit()
              } else {
             openRed(result?.message)
              }
@@ -144,6 +146,7 @@ useEffect(()=>{
       }, 300)
       /**Закрываем окна и очищаем данные*/
       set_hideModal(false);
+      set_hideModal_edit(false);
       set_hideDeleteModal(false);
       set_entry(null);
       set_entry_id(null);
@@ -160,6 +163,12 @@ return (<>
      }
    {hideModal? 
       <Modal 
+      entry={entry} 
+      confirm_save_Entry={confirm_save_Entry} 
+      exit = {exit}
+   />: "" }
+   {hideModal_edit? 
+      <Modal_edit 
       entry={entry} 
       confirm_save_Entry={confirm_save_Entry} 
       exit = {exit}
@@ -193,9 +202,9 @@ return (<>
                 </div>
                 <div className="dataTable-search">   
                 <button 
-               // onClick={e=>open_create_Entry()}
+                onClick={e=>open_create_Entry()}
                 type="button" className="btn bg-gradient-info btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
-                Добавить образы
+                   {translate('objects.images.add_entry')}
                 </button>
                 </div>
              </div>
@@ -211,7 +220,7 @@ return (<>
                         </th>                 
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.version')}
                         </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"width="100px" >{translate('common.columns.created')}
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="100px" >{translate('common.columns.created')}
                         </th>                 
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
                         <i className="material-icons">edit</i>
@@ -219,22 +228,22 @@ return (<>
                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
                         <i className="material-icons">delete</i>
                         </th>
-                  </tr>
+                    </tr>
                    </thead>
                    <tbody>
-                   {false && content?.map(entry=><tr key={String(entry.user_id)}>
-                        <td className="text-sm font-weight-normal">{entry.user_id}</td>
-                        <td className="text-sm font-weight-normal">{entry.username}</td>
-                        <td className="text-sm font-weight-normal">{entry.login}</td>
-                        <td className="text-sm font-weight-normal">{entry.email}</td>
+                   {true && content?.map(entry=><tr key={String(entry.images_id)}>
+                        <td className="text-sm font-weight-normal">{entry.images_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.image_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.repository}</td>
+                        <td className="text-sm font-weight-normal">{entry.tag}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
                         <td className="text-sm font-weight-normal">
                            <i className="material-icons cursor-pointer" title={translate('settings.users.edit_user')} 
-                           onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
+                           onClick={event=> open_update_Entry(entry.images_id)} >edit</i>
                            </td>                       
                         <td className="text-sm font-weight-normal">
                            <i className="material-icons cursor-pointer" title={translate('settings.users.delete_user')} 
-                           onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
+                           onClick={event=> open_delete_Entry(entry.images_id)}>delete</i>
                            </td>
                       </tr>)}
                    </tbody>

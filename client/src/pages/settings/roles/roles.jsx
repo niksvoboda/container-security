@@ -6,7 +6,7 @@ import { Select } from "../../../components/UI/kit/select";
 import date_format  from "dateformat";
 import Searchinput from '../../../components/UI/kit/searchinput';
 import { Modal } from './modal';
-import { ModalDelete } from './modal_delete';
+import { ModalDelete } from '../../../components/UI/kit/modal_delete';
 import { useSnackbar } from 'react-simple-snackbar'
 import { option_green_snackbar, option_red_snackbar } from '../../../components/UI/kit/Snackbar';
 import { UserContext, TranslateContext } from '../../../contex';

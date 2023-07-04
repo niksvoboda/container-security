@@ -49,7 +49,7 @@ class AuthController{
             user = user[0]
            // console.log(JSON.parse(user?.permissions).max_attempts)
           // console.log(email, password)
-          // console.log(user)
+            console.log(user)
             /**ЕСЛИ ЮЗЕР НЕ НАЙДЕН */
             if(!user){
                 return res.status(400).json({message: 'Неправильный пароль или пользователь не найден1'})

@@ -156,7 +156,7 @@ return (
             type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">{ translate('common.buttons.cancel')}</button>
             <button 
                onClick={handleSubmit(onSubmit)}
-               type="button" class="btn bg-gradient-primary">{ translate('common.buttons.save')}</button>
+               type="button" class="btn bg-gradient-primary">{translate('common.buttons.save')}</button>
          </div>
       </div>
    </div>

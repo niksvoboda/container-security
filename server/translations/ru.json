@@ -45,7 +45,7 @@
         "objects":"Объекты",
         "vulnerabilities":"Уязвимости",
         "bestpractice":"Лучшие практики",
-        "scheduledjobs":"Расписание проверок",
+        "scheduledjobs":"Консоль оператора",
         "settings":"Настройки",
         "reports":"Отчеты",
         "logout":"Выход"
@@ -55,9 +55,19 @@
             "images":"Образы",
             "containers":"Контейнеры"      
         },
-        
-        "edit_entry":"Редактировать задание",
-        "delete_entry":"Удалить задание"        
+        "images":{
+            "add_entry":"Добавить образ",
+            "edit_entry":"Редактировать образ",
+            "delete_entry":"Удалить образ",
+            "modal_title": "образов" 
+        },
+        "containers":{
+            "add_entry":"Добавить контейнер",
+            "edit_entry":"Редактировать контейнер",
+            "delete_entry":"Удалить контейнер",
+            "modal_title": "контейнеров"  
+        }
+               
     }, 
     "scheduledjobs":{        
         "add_entry":"Добавить задание",
