@@ -123,7 +123,7 @@ className="modal fade show " >
               <div className="col-sm-4">
                   <div class="input-group input-group-dynamic is-filled my-3 ">
                      <label class="form-label">Должность</label>
-                     <select className="form-control"
+                     <select className="form-control dark-version"
                     {...register("role_id")}>
                     {entry?.roles &&
                     entry.roles.map(r=>

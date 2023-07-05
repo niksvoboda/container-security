@@ -8,17 +8,18 @@ const Api_Roles         = require('../controllers/api_Roles')
 const Api_System        = require('../controllers/api_System')
 const Api_Containers    = require('../controllers/api_Containers')
 const Api_Images        = require('../controllers/api_Images')
+const Api_Operation_console   = require('../controllers/api_Operation_console')
 
-//auth
+//auth 
 router.post('/login',  Auth_Controller.login);
 router.post('/logout', Auth_Controller.logout);
 
-//scheduledjobs
-router.get('/scheduledjobs/jobs',        Auth, Api_Users.getEntrys);  
-router.get('/scheduledjobs/job',         Auth, Api_Users.getEntry);  
-router.post('/scheduledjobs/job_add',    Auth, Api_Users.addEntry);
-router.post('/scheduledjobs/job_update', Auth, Api_Users.updateEntry);
-router.post('/scheduledjobs/job_delete', Auth, Api_Roles.deleteEntry);
+//operationconsoles
+router.get('/operationconsoles/jobs',        Auth, Api_Operation_console.getEntrys);  
+router.get('/operationconsoles/job',         Auth, Api_Operation_console.getEntry);  
+router.post('/operationconsoles/job_add',    Auth, Api_Operation_console.addEntry);
+router.post('/operationconsoles/job_update', Auth, Api_Operation_console.updateEntry);
+router.post('/operationconsoles/job_delete', Auth, Api_Operation_console.deleteEntry);
 
 //translate
 router.get('/translate', Api_System.getTranslate);

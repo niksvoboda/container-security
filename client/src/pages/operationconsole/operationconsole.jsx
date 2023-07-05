@@ -1,18 +1,18 @@
 import React, { useState ,useEffect, useContext} from 'react';
-import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../http/api_users";
+import { fetchEntrys  , fetchEntry , addEntry, updateEntry, deleteEntry} from "../../http/api_operationconsoles";
 import Pagenumbers from '../../components/UI/kit/pagenumbers';
 import { Pagination } from '../../components/UI/kit/pagination';
 import { Select } from "../../components/UI/kit/select";
 import date_format  from "dateformat";
 import Searchinput from '../../components/UI/kit/searchinput';
 import { Modal } from './modal';
-import { ModalDelete } from './modal_delete';
+import { ModalDelete } from '../../components/UI/kit/modal_delete';
 import { useSnackbar } from 'react-simple-snackbar'
 import { option_green_snackbar, option_red_snackbar } from '../../components/UI/kit/Snackbar';
 import { UserContext, TranslateContext } from '../../contex';
-import Styles from './Scheduledjobs.module.css'
+import Styles from './Operationconsole.module.css'
 
-const Scheduledjobs = () => {
+const OperationConsole = () => {
 /** Ролевая модель */
 const {user} = useContext(UserContext)
 const {translate} = useContext(TranslateContext)
@@ -213,39 +213,32 @@ return (<>
                 <table className="table table-flush dataTable-table" id="datatable-search">
                    <thead className="thead-light">
                    <tr>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
-                        </th>                
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.name')}
-                        </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.login')}
-                        </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.email')}
-                        </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}
-                        </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i className="material-icons">edit</i>
-                        </th>                   
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i className="material-icons">delete</i>
-                        </th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID</th>                
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.title')}</th>                 
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.task_type')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.start')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.end')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.status')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.creator_id')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}</th>                 
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px"><i className="material-icons">edit</i></th>                   
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px"><i className="material-icons">delete</i></th>
                   </tr>
                    </thead>
                    <tbody>
-                   {content?.map(entry=><tr key={String(entry.user_id)}>
-                        <td className="text-sm font-weight-normal">{entry.user_id}</td>
-                        <td className="text-sm font-weight-normal">{entry.username}</td>
-                        <td className="text-sm font-weight-normal">{entry.login}</td>
-                        <td className="text-sm font-weight-normal">{entry.email}</td>
+                   {content?.map(entry=><tr key={String(entry.tasks_id)}>
+                        <td className="text-sm font-weight-normal">{entry.tasks_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.title}</td>
+                        <td className="text-sm font-weight-normal">{entry.task_type}</td>
+                        <td className="text-sm font-weight-normal">{entry.start}</td>
+                        <td className="text-sm font-weight-normal">{entry.end}</td>
+                        <td className="text-sm font-weight-normal">{entry.status}</td>
+                        <td className="text-sm font-weight-normal">{entry.creator_id}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
-                        <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title={translate('scheduledjobs.edit_entry')} 
-                           onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
-                           </td>                       
-                        <td className="text-sm font-weight-normal">
-                           <i className="material-icons cursor-pointer" title={translate('scheduledjobs.delete_entry')} 
-                           onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
-                           </td>
+                        <td className="text-sm font-weight-normal"><i className="material-icons cursor-pointer" title={translate('scheduledjobs.edit_entry')} 
+                           onClick={event=> open_update_Entry(entry.tasks_id)} >edit</i></td>                       
+                        <td className="text-sm font-weight-normal"><i className="material-icons cursor-pointer" title={translate('scheduledjobs.delete_entry')} 
+                           onClick={event=> open_delete_Entry(entry.tasks_id)}>delete</i></td>
                       </tr>)}
                    </tbody>
                 </table>
@@ -278,4 +271,4 @@ return (<>
     );
 };
 
-export default Scheduledjobs;
+export default OperationConsole;

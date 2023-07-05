@@ -1,15 +1,16 @@
-const Users  = require("../models/_users"); 
+
+const Tasks  = require("../models/_tasks"); 
     /**
      * Класс данных для страницы заказчиков
      */
-class Api_Scheduledjobs{
+class Api_Operation_console{
         
-    name = "Api_Scheduledjobs";
+    name = "Api_Operation_console";
 
     async getEntrys(req, res) {        
         try {
         const {start, length, search} = req.query;
-        const result = await Users.getEntrys(search);
+        const result = await Tasks.getEntrys(search);
           let response = {
             status: "OK",
             data: result.slice(Number(start), Number(start)+Number(length)),
@@ -65,4 +66,4 @@ class Api_Scheduledjobs{
     }
 }
 
-module.exports = new Api_Users();
+module.exports = new Api_Operation_console();
