@@ -53,3 +53,32 @@
 .height-card{
     min-height: calc(100vh - 77px);    
 }
+
+
+.y-scroll-hooks{
+    overflow-y:scroll;
+}
+
+/* width */
+.y-scroll-hooks::-webkit-scrollbar {
+    width: 3px;  
+}
+
+/* Track */
+.y-scroll-hooks::-webkit-scrollbar-track {
+    margin-top: 8px;
+    margin-bottom: 8px;
+ /* Track    background: #f1f1f1; */
+}
+
+/* Handle */
+.y-scroll-hooks::-webkit-scrollbar-thumb {
+    background: #244870;
+    height: 20px;
+    border-radius: 3px;
+}
+
+/* Handle on hover */
+.y-scroll-hooks::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

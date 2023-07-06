@@ -8,6 +8,14 @@ export const SCHEDULEDJOBS_ROUTE = '/scheduledjobs'
 export const SETTINGS_ROUTE = '/settings'
 export const VULNERABILITIES_ROUTE = '/vulnerabilities'
 export const ONJECTS_ROUTE = '/objects'
+export const ACTIVES_ROUTE = '/actives'
+
+export const CONTAINERS_ROUTE = '/containers'
+export const IMAGES_ROUTE = '/images'
+export const ORCHESTRATIONS_ROUTE = '/orchestrations'
+export const NODES_ROUTE = '/nodes'
+
+export const RISKS_ROUTE = '/risks'
 
 export const NOT_PERMISSONS_ROUTE = '/notpermissions'
 export const LOGIN_ROUTE = '/login'

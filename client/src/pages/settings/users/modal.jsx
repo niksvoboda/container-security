@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { UserContext } from '../../../contex';
 
 export const Modal = ({entry, confirm_save_Entry , exit}) => {
-   /** Ролевая модель */
+/** Ролевая модель */
 const {user} = useContext(UserContext)
        console.log(entry)
         console.log(entry)

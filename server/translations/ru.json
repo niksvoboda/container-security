@@ -42,7 +42,12 @@
     "left_menu":{
         "app_name":"Монитор уязвимостей",
         "dashboards":"Панель управления",
-        "objects":"Объекты",
+        "invertory":"Активы",
+        "containers":"Контейнеры",
+        "images":"Образы",
+        "orchestrations":"Оркестраторы",
+        "nodes":"Ноды",
+        "risks":"Риски",
         "vulnerabilities":"Уязвимости",
         "bestpractice":"Лучшие практики",
         "scheduledjobs":"Консоль оператора",
