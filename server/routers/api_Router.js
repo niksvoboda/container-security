@@ -15,11 +15,11 @@ router.post('/login',  Auth_Controller.login);
 router.post('/logout', Auth_Controller.logout);
 
 //operationconsoles
-router.get('/operationconsoles/jobs',        Auth, Api_Operation_console.getEntrys);  
-router.get('/operationconsoles/job',         Auth, Api_Operation_console.getEntry);  
-router.post('/operationconsoles/job_add',    Auth, Api_Operation_console.addEntry);
-router.post('/operationconsoles/job_update', Auth, Api_Operation_console.updateEntry);
-router.post('/operationconsoles/job_delete', Auth, Api_Operation_console.deleteEntry);
+router.get('/operationconsoles/tasks',        Auth, Api_Operation_console.getEntrys);  
+router.get('/operationconsoles/task',         Auth, Api_Operation_console.getEntry);  
+router.post('/operationconsoles/task_add',    Auth, Api_Operation_console.addEntry);
+router.post('/operationconsoles/task_update', Auth, Api_Operation_console.updateEntry);
+router.post('/operationconsoles/task_delete', Auth, Api_Operation_console.deleteEntry);
 
 //translate
 router.get('/translate', Api_System.getTranslate);

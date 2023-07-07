@@ -203,38 +203,29 @@ return (<>
                 <table className="table table-flush dataTable-table" id="datatable-search">
                    <thead className="thead-light">
                    <tr>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID
-                        </th>                
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.container_id')}
-                        </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.image')}
-                        </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.command')}
-                        </th>
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}
-                        </th>                 
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i className="material-icons">edit</i>
-                        </th>                   
-                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px">
-                        <i className="material-icons">delete</i>
-                        </th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="20px" >ID</th>                
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.container_id')}</th>                 
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.image')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.command')}</th>
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >{translate('common.columns.created')}</th>                 
+                     {false && <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px"><i className="material-icons">edit</i></th> }                  
+                     <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="40px"><i className="material-icons">delete</i></th>
                   </tr>
                    </thead>
                    <tbody>
-                   {false && content?.map(entry=><tr key={String(entry.user_id)}>
-                        <td className="text-sm font-weight-normal">{entry.user_id}</td>
-                        <td className="text-sm font-weight-normal">{entry.username}</td>
-                        <td className="text-sm font-weight-normal">{entry.login}</td>
+                   { content?.map(entry=><tr key={String(entry.containers_id)}>
+                        <td className="text-sm font-weight-normal">{entry.container_id}</td>
+                        <td className="text-sm font-weight-normal">{entry.image}</td>
+                        <td className="text-sm font-weight-normal">{entry.command}</td>
                         <td className="text-sm font-weight-normal">{entry.email}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
                         <td className="text-sm font-weight-normal">
                            <i className="material-icons cursor-pointer" title={translate('settings.users.edit_user')} 
-                           onClick={event=> open_update_Entry(entry.user_id)} >edit</i>
+                           onClick={event=> open_update_Entry(entry.containers_id)} >edit</i>
                            </td>                       
                         <td className="text-sm font-weight-normal">
                            <i className="material-icons cursor-pointer" title={translate('settings.users.delete_user')} 
-                           onClick={event=> open_delete_Entry(entry.user_id)}>delete</i>
+                           onClick={event=> open_delete_Entry(entry.containers_id)}>delete</i>
                            </td>
                       </tr>)}
                    </tbody>

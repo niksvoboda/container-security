@@ -25,7 +25,7 @@ const [isLoading, set_isLoading]= useState(false);
 /** Для компонента поиска */
 const[search, setSearch] = useState("")
 //Количество записей на странице
-const [length, setLength] = useState(5);
+const [length, setLength] = useState(10);
 const [start, setStart] = useState(0);
 //Пагинация
 const [totalPage, setTotalPage] = useState(0);
@@ -103,7 +103,7 @@ useEffect(()=>{
            if (result?.status === "OK") {
             openGreen(result?.message)
              /** Если запрос успешен закрываем форму и обнуляем ENTRY_ID */
-           //  exit()
+             exit()
              } else {
             openRed(result?.message)
              }

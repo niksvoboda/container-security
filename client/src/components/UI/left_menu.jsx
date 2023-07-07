@@ -11,13 +11,10 @@ const Left_menu = () => {
    const currentItem = aside_menu.filter(menuitem => menuitem.link === location.pathname);
    useEffect(() => {
       document.title = `${translate('left_menu.app_name')}  /  ${translate(currentItem[0]?.name? currentItem[0]?.name : 'left_menu.app_name')}`;
-    }, [currentItem]);
-    
+    }, [currentItem]);    
 const [show_sub, set_show_sub] = useState(true)
 
-
-return (
-        
+return (        
 <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark hook_sidenav ">
     <div className="sidenav-header">
       <i className="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" ></i>

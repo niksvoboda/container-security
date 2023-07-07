@@ -54,6 +54,10 @@
     min-height: calc(100vh - 77px);    
 }
 
+.hooks-height-card-page-no-btn{
+    min-height: calc(100vh - 234px);    
+}
+
 
 .y-scroll-hooks{
     overflow-y:scroll;

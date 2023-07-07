@@ -2,7 +2,7 @@ import {$authHost} from "./index"
 
 export const fetchEntrys = async (start, length, search) => {
     try {
-        const {data} = await $authHost.get('api/operationconsoles/jobs', { params: {start, length, search}});
+        const {data} = await $authHost.get('api/operationconsoles/tasks', { params: {start, length, search}});
         console.log(data)
         return data
     } catch (error) {
@@ -13,7 +13,7 @@ export const fetchEntrys = async (start, length, search) => {
 
 export const fetchEntry = async (id) => {
     try {
-        const {data} = await $authHost.get('api/operationconsoles/job', { params: {id}});
+        const {data} = await $authHost.get('api/operationconsoles/task', { params: {id}});
         return data
     } catch (error) {
         console.log(error)
@@ -24,7 +24,7 @@ export const fetchEntry = async (id) => {
 export const deleteEntry = async (id) => {
     try {
         console.log(id)
-        const {data} = await $authHost.post('api/operationconsoles/job_delete', { params: {id}});
+        const {data} = await $authHost.post('api/operationconsoles/task_delete', { params: {id}});
         console.log(data)
         return data
     } catch (error) {
@@ -36,7 +36,7 @@ export const deleteEntry = async (id) => {
 
 export const addEntry = async ( _data) => {
     try {
-        const {data} = await $authHost.post('api/operationconsoles/job_add', { params: {data: _data}});
+        const {data} = await $authHost.post('api/operationconsoles/task_add', { params: {data: _data}});
         return data
     } catch (error) {
         console.log(error)
@@ -47,7 +47,7 @@ export const addEntry = async ( _data) => {
 
 export const updateEntry = async (_data, id) => {
     try {
-        const {data} = await $authHost.post('api/operationconsoles/job_update', { params: {data:_data, id}});
+        const {data} = await $authHost.post('api/operationconsoles/task_update', { params: {data:_data, id}});
         return data
     } catch (error) {
         console.log(error)

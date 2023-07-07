@@ -12,7 +12,7 @@ export const Modal = ({entry, confirm_save_Entry , exit}) => {
 /** Ролевая модель */
 const {user} = useContext(UserContext)
 const {translate} = useContext(TranslateContext)
-const [type_task, set_type_task] = useState("0")
+const [type_task, set_type_task] = useState("2")
 const [form, set_form] = useState(<Modal_1/>)
 //console.log(entry)
 /**Кнопка esc */
@@ -71,7 +71,9 @@ className="modal fade show " >
               <div className="col-sm-6">
                   <div class="input-group input-group-dynamic is-filled my-3 ">
                       <label class="form-label">Тип задачи</label>
-                      <select onChange={event => set_type_task(event.target.value)}
+                      <select
+                      value={type_task}
+                      onChange={event => set_type_task(event.target.value)}
                       type="email" class="form-control dark-version">
                           {options.map( p=>
                               <option value={p.value}>{p.name}</option>

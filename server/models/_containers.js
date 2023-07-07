@@ -11,7 +11,6 @@ class Containers  extends Log {
         WHERE container_id LIKE $1 
         OR  image LIKE $1 
         OR  command LIKE $1 
-        OR  created LIKE $1 
         OR  status LIKE $1 
         OR  ports LIKE $1 
         OR  _names LIKE $1 
@@ -28,19 +27,12 @@ class Containers  extends Log {
         let result = await db.asyncQuery("SELECT * FROM tbl_containers WHERE container_id = $1", [container_id]);
         return result;
     }    
-    async addEntry(
-            title,
-            permissions,
-            creator_id) {
+    async addEntry(container_id, image, command, ports, status, _names) {
         self.blue(".addEntry")
         let result = await db.asyncQuery(`INSERT INTO tbl_containers 
-        (   title,
-            permissions,
-            creator_id) 
-        VALUES ($1,$2,$3)`,
-         [  title,
-            permissions,
-            creator_id]);
+        ( container_id, image, command, ports, status,  _names) 
+        VALUES ($1,$2,$3,$4,$5,$6)`,
+         [ container_id, image, command, ports, status,  _names]);
         return result;
     }
     async updateEntry(

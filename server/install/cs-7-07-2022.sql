@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-17 20:40:15
+-- Started on 2023-07-07 15:41:08
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,20 +19,22 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 2 (class 3079 OID 16384)
--- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+-- TOC entry 5 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
 --
 
-CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+CREATE SCHEMA public;
 
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
 
 --
--- TOC entry 3371 (class 0 OID 0)
--- Dependencies: 2
--- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+-- TOC entry 3401 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
 --
 
-COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+COMMENT ON SCHEMA public IS 'standard public schema';
 
 
 SET default_tablespace = '';
@@ -40,7 +42,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 216 (class 1259 OID 24594)
+-- TOC entry 215 (class 1259 OID 16398)
 -- Name: scan; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -61,7 +63,7 @@ CREATE TABLE public.scan (
 ALTER TABLE public.scan OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1259 OID 24593)
+-- TOC entry 216 (class 1259 OID 16403)
 -- Name: scan_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -76,8 +78,8 @@ CREATE SEQUENCE public.scan_id_seq
 ALTER TABLE public.scan_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3372 (class 0 OID 0)
--- Dependencies: 215
+-- TOC entry 3402 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: scan_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -85,7 +87,7 @@ ALTER SEQUENCE public.scan_id_seq OWNED BY public.scan.id;
 
 
 --
--- TOC entry 222 (class 1259 OID 24622)
+-- TOC entry 217 (class 1259 OID 16404)
 -- Name: tabl_last_passwords; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -101,7 +103,7 @@ CREATE TABLE public.tabl_last_passwords (
 ALTER TABLE public.tabl_last_passwords OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 24621)
+-- TOC entry 218 (class 1259 OID 16407)
 -- Name: tabl_last_passwords_passwd_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -116,8 +118,8 @@ CREATE SEQUENCE public.tabl_last_passwords_passwd_id_seq
 ALTER TABLE public.tabl_last_passwords_passwd_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3373 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3403 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: tabl_last_passwords_passwd_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -125,7 +127,94 @@ ALTER SEQUENCE public.tabl_last_passwords_passwd_id_seq OWNED BY public.tabl_las
 
 
 --
--- TOC entry 224 (class 1259 OID 24629)
+-- TOC entry 226 (class 1259 OID 16459)
+-- Name: tbl_containers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tbl_containers (
+    container_id character varying(128),
+    image character varying(256),
+    command character varying(128),
+    created character varying(128),
+    status character varying(128),
+    ports character varying(128),
+    _names character varying(128),
+    created_dt timestamp without time zone,
+    changed_dt timestamp without time zone,
+    containers_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.tbl_containers OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16475)
+-- Name: tbl_containers_containers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tbl_containers_containers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tbl_containers_containers_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3404 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: tbl_containers_containers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tbl_containers_containers_id_seq OWNED BY public.tbl_containers.containers_id;
+
+
+--
+-- TOC entry 225 (class 1259 OID 16447)
+-- Name: tbl_images; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tbl_images (
+    image_id character varying(128),
+    repository character varying(512),
+    tag character varying(128),
+    created_dt timestamp without time zone,
+    changed_dt timestamp without time zone,
+    images_id bigint NOT NULL,
+    size character varying(128)
+);
+
+
+ALTER TABLE public.tbl_images OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16485)
+-- Name: tbl_images_images_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tbl_images_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tbl_images_images_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3405 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: tbl_images_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tbl_images_images_id_seq OWNED BY public.tbl_images.images_id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16408)
 -- Name: tbl_settings; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -143,7 +232,7 @@ CREATE TABLE public.tbl_settings (
 ALTER TABLE public.tbl_settings OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 24628)
+-- TOC entry 220 (class 1259 OID 16413)
 -- Name: tbl_settings_setting_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -158,8 +247,8 @@ CREATE SEQUENCE public.tbl_settings_setting_id_seq
 ALTER TABLE public.tbl_settings_setting_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3374 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 3406 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: tbl_settings_setting_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -167,7 +256,53 @@ ALTER SEQUENCE public.tbl_settings_setting_id_seq OWNED BY public.tbl_settings.s
 
 
 --
--- TOC entry 218 (class 1259 OID 24603)
+-- TOC entry 230 (class 1259 OID 24577)
+-- Name: tbl_tasks; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tbl_tasks (
+    task_id bigint NOT NULL,
+    title character varying,
+    task_type character varying,
+    logs character varying,
+    _period character varying,
+    created_dt time without time zone,
+    chaged_dt time without time zone,
+    creator_id bigint,
+    _start character varying,
+    _end character varying,
+    status character varying
+);
+
+
+ALTER TABLE public.tbl_tasks OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 24576)
+-- Name: tbl_tasks_task_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tbl_tasks_task_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tbl_tasks_task_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3407 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: tbl_tasks_task_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tbl_tasks_task_id_seq OWNED BY public.tbl_tasks.task_id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 16414)
 -- Name: tbl_users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -194,7 +329,7 @@ CREATE TABLE public.tbl_users (
 ALTER TABLE public.tbl_users OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 24613)
+-- TOC entry 222 (class 1259 OID 16420)
 -- Name: tbl_users_roles; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -212,7 +347,7 @@ CREATE TABLE public.tbl_users_roles (
 ALTER TABLE public.tbl_users_roles OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 24612)
+-- TOC entry 223 (class 1259 OID 16425)
 -- Name: tbl_users_roles_role_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -227,8 +362,8 @@ CREATE SEQUENCE public.tbl_users_roles_role_id_seq
 ALTER TABLE public.tbl_users_roles_role_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3375 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3408 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: tbl_users_roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -236,7 +371,7 @@ ALTER SEQUENCE public.tbl_users_roles_role_id_seq OWNED BY public.tbl_users_role
 
 
 --
--- TOC entry 217 (class 1259 OID 24602)
+-- TOC entry 224 (class 1259 OID 16426)
 -- Name: tbl_users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -251,8 +386,8 @@ CREATE SEQUENCE public.tbl_users_user_id_seq
 ALTER TABLE public.tbl_users_user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3376 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 3409 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: tbl_users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -260,7 +395,7 @@ ALTER SEQUENCE public.tbl_users_user_id_seq OWNED BY public.tbl_users.user_id;
 
 
 --
--- TOC entry 3194 (class 2604 OID 24597)
+-- TOC entry 3209 (class 2604 OID 16427)
 -- Name: scan id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -268,7 +403,7 @@ ALTER TABLE ONLY public.scan ALTER COLUMN id SET DEFAULT nextval('public.scan_id
 
 
 --
--- TOC entry 3198 (class 2604 OID 24625)
+-- TOC entry 3210 (class 2604 OID 16428)
 -- Name: tabl_last_passwords passwd_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -276,7 +411,23 @@ ALTER TABLE ONLY public.tabl_last_passwords ALTER COLUMN passwd_id SET DEFAULT n
 
 
 --
--- TOC entry 3199 (class 2604 OID 24632)
+-- TOC entry 3216 (class 2604 OID 16476)
+-- Name: tbl_containers containers_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_containers ALTER COLUMN containers_id SET DEFAULT nextval('public.tbl_containers_containers_id_seq'::regclass);
+
+
+--
+-- TOC entry 3215 (class 2604 OID 16486)
+-- Name: tbl_images images_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_images ALTER COLUMN images_id SET DEFAULT nextval('public.tbl_images_images_id_seq'::regclass);
+
+
+--
+-- TOC entry 3211 (class 2604 OID 16429)
 -- Name: tbl_settings setting_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -284,7 +435,15 @@ ALTER TABLE ONLY public.tbl_settings ALTER COLUMN setting_id SET DEFAULT nextval
 
 
 --
--- TOC entry 3195 (class 2604 OID 24606)
+-- TOC entry 3217 (class 2604 OID 24580)
+-- Name: tbl_tasks task_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_tasks ALTER COLUMN task_id SET DEFAULT nextval('public.tbl_tasks_task_id_seq'::regclass);
+
+
+--
+-- TOC entry 3212 (class 2604 OID 16430)
 -- Name: tbl_users user_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -292,7 +451,7 @@ ALTER TABLE ONLY public.tbl_users ALTER COLUMN user_id SET DEFAULT nextval('publ
 
 
 --
--- TOC entry 3197 (class 2604 OID 24616)
+-- TOC entry 3214 (class 2604 OID 16431)
 -- Name: tbl_users_roles role_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -300,8 +459,8 @@ ALTER TABLE ONLY public.tbl_users_roles ALTER COLUMN role_id SET DEFAULT nextval
 
 
 --
--- TOC entry 3357 (class 0 OID 24594)
--- Dependencies: 216
+-- TOC entry 3380 (class 0 OID 16398)
+-- Dependencies: 215
 -- Data for Name: scan; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -310,8 +469,8 @@ COPY public.scan (id, ip, mask, port_protocol, port, protocol, service, status, 
 
 
 --
--- TOC entry 3363 (class 0 OID 24622)
--- Dependencies: 222
+-- TOC entry 3382 (class 0 OID 16404)
+-- Dependencies: 217
 -- Data for Name: tabl_last_passwords; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -320,8 +479,64 @@ COPY public.tabl_last_passwords (passwd_id, user_id, password, created_dt, chang
 
 
 --
--- TOC entry 3365 (class 0 OID 24629)
--- Dependencies: 224
+-- TOC entry 3391 (class 0 OID 16459)
+-- Dependencies: 226
+-- Data for Name: tbl_containers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tbl_containers (container_id, image, command, created, status, ports, _names, created_dt, changed_dt, containers_id) FROM stdin;
+d8d78e758d6f	c939afe67c02	"docker-entrypoint.s…"	\N	--	--	--	\N	\N	32
+c30defc37e87	registry.antph.ru/start-gpb/learning-bank:latest	"docker-entrypoint.s…"	\N	--	--	--	\N	\N	33
+10ed958a58cc	postgres:12	"docker-entrypoint.s…"	\N	--	--	--	\N	\N	35
+c0f50e22fd42	quay.io/minio/minio	"/usr/bin/docker-ent…"	\N	--	--	--	\N	\N	36
+0e96febed189	redis:latest	"docker-entrypoint.s…"	\N	--	--	--	\N	\N	37
+067fdc3d5790	mariadb	"docker-entrypoint.s…"	\N	--	--	--	\N	\N	38
+94877c8365be	7fe16b25e522	"/docker-entrypoint.…"	\N	--	--	--	\N	\N	39
+0eec20f84d04	brainsam/pgbouncer:1.7.2	"./entrypoint.sh"	\N	--	--	--	\N	\N	40
+\.
+
+
+--
+-- TOC entry 3390 (class 0 OID 16447)
+-- Dependencies: 225
+-- Data for Name: tbl_images; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tbl_images (image_id, repository, tag, created_dt, changed_dt, images_id, size) FROM stdin;
+7fe16b25e522	registry.antph.ru/start-gpb/frontend-bank	1.8	\N	\N	452	--
+4ff207346a67	registry.antph.ru/start-gpb/frontend-bank	<none>	\N	\N	453	--
+b182ef6d607a	registry.antph.ru/start-gpb/frontend-bank	<none>	\N	\N	454	--
+830b950bacb5	registry.antph.ru/start-gpb/backend-bank	<none>	\N	\N	455	--
+9176915dcfa5	registry.antph.ru/start-gpb/frontend-bank	<none>	\N	\N	456	--
+4657eb098818	registry.antph.ru/start-gpb/backend-bank	<none>	\N	\N	457	--
+9b0429d03607	registry.antph.ru/start-gpb/frontend-bank	<none>	\N	\N	458	--
+c7d3b8c85802	registry.antph.ru/start-gpb/backend-bank	<none>	\N	\N	459	--
+47fc276ae4ea	registry.antph.ru/start-gpb/learning-bank	0.8	\N	\N	460	--
+a22d559e5cd7	reestros-master_app	2.0	\N	\N	461	--
+080ed0ed8312	nginx	latest	\N	\N	462	--
+ac23c4ddf6fa	bitnami/pgbouncer	1.18.0	\N	\N	463	--
+6e11fcfc66ad	mariadb	latest	\N	\N	464	--
+f9c173b0f012	redis	7.0.9	\N	\N	465	--
+971660cd20b7	quay.io/minio/minio	RELEASE.2023-02-27T18-10-45	\N	\N	466	--
+042a816809aa	alpine	latest	\N	\N	467	--
+ffd287e43d20	redis	7.0.5-alpine	\N	\N	468	--
+3358aea34e8c	redis	7.0.5	\N	\N	469	--
+dcb2210db7e5	postgres	12	\N	\N	470	--
+d882c833e429	registry.antph.ru/start-gpb/frontend-bank	<none>	\N	\N	471	--
+7b6e59279c38	portainer/portainer-ce	latest	\N	\N	472	--
+615bce135f70	snyk/snyk	<none>	\N	\N	473	--
+2edf146a7810	brainsam/pgbouncer	1.12	\N	\N	474	--
+5ebd56b2ba73	brainsam/pgbouncer	1.7.2	\N	\N	475	--
+f55358022500	registry.antph.ru/start-gpb/frontend-bank	latest	\N	\N	476	--
+63d09b7d90d8	registry.antph.ru/start-gpb/backend-bank	latest	\N	\N	477	--
+c939afe67c02	registry.antph.ru/start-gpb/backend-bank	1.8	\N	\N	478	--
+6f00a89e54da	registry.antph.ru/start-gpb/backend-bank	<none>	\N	\N	479	--
+\.
+
+
+--
+-- TOC entry 3384 (class 0 OID 16408)
+-- Dependencies: 219
 -- Data for Name: tbl_settings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -334,8 +549,22 @@ COPY public.tbl_settings (setting_id, _group, _key, val, enabled, created_dt, ch
 
 
 --
--- TOC entry 3359 (class 0 OID 24603)
--- Dependencies: 218
+-- TOC entry 3395 (class 0 OID 24577)
+-- Dependencies: 230
+-- Data for Name: tbl_tasks; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tbl_tasks (task_id, title, task_type, logs, _period, created_dt, chaged_dt, creator_id, _start, _end, status) FROM stdin;
+12	Импорт 07-08	2			\N	\N	1			
+13		2			\N	\N	1			
+14	qwer	2			\N	\N	1			
+15	Импорт 2	2			\N	\N	1			
+\.
+
+
+--
+-- TOC entry 3386 (class 0 OID 16414)
+-- Dependencies: 221
 -- Data for Name: tbl_users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -354,12 +583,14 @@ COPY public.tbl_users (user_id, username, login, password, role_id, salt, attemp
 10	123123112347	admin1115	858ffeefcf5d94a75e2ff81d372ae0da87d9f70de922eaf99c6f84f9c0e94224947a05f268f3df95725e7f7eb5784f800e1d024762806c731086fbf0013af4b9	1	\N	0	\N	\N	Tester1111	111111111111121	+790011122335	1	\N	\N	false
 16	12312311231	admin1111ыф	804235d1c3c61b2fbc7d2728f04b7ac00c2ad79db55e03da866c988ed4480b2ad971f8ee6f070021e3c51dbe7be35f8b56528a9182cdd18766204f07c8d90baf	1	6323324487	0	0	\N	Tester1111	111111111111121	+79001112233	1	\N	\N	1
 1	Администратор666	admin	d456b104fe116a54fea313d266c49d685b645cfe907a172d1899697ee83e1ffdd902b275c3dc59a0414b0350dcb0977d8e3b39d9e2367079a75735007f8f4f10	3	1	1	admin	36	00003	+79009009090	admin@dinatech.ru	1	2023-04-28 17:46:41	2023-05-04 15:45:51	
+17	fedor	admin111	6820ef8cb721fba8774582dbaf96677d39d8b5c8517fb2924dbd9256a664ef0acffeb484b441fba97348257574769d72650d100505bdd114f555ba0347b6b612	1	9035595750	0	Tester111	\N	111111111111	+79001112233	svoboda9000@gmail.com	1	\N	\N	
+19	123	admin1111	ee9e59636ca719f864939e9ba78a118c462a71afcd3862eca525265f16a6496b0997ed78511caaabefb7d4da3e8ca4b7298d766d5472f7d4f11f21831d460f1e	1	45058242.2	0	123	\N	123	123	123	1	\N	\N	
 \.
 
 
 --
--- TOC entry 3361 (class 0 OID 24613)
--- Dependencies: 220
+-- TOC entry 3387 (class 0 OID 16420)
+-- Dependencies: 222
 -- Data for Name: tbl_users_roles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -374,8 +605,8 @@ COPY public.tbl_users_roles (role_id, title, permissions, locked, creator_id, ch
 
 
 --
--- TOC entry 3377 (class 0 OID 0)
--- Dependencies: 215
+-- TOC entry 3410 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: scan_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -383,8 +614,8 @@ SELECT pg_catalog.setval('public.scan_id_seq', 1, false);
 
 
 --
--- TOC entry 3378 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3411 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: tabl_last_passwords_passwd_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -392,8 +623,26 @@ SELECT pg_catalog.setval('public.tabl_last_passwords_passwd_id_seq', 1, false);
 
 
 --
--- TOC entry 3379 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 3412 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: tbl_containers_containers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tbl_containers_containers_id_seq', 40, true);
+
+
+--
+-- TOC entry 3413 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: tbl_images_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tbl_images_images_id_seq', 479, true);
+
+
+--
+-- TOC entry 3414 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: tbl_settings_setting_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -401,8 +650,17 @@ SELECT pg_catalog.setval('public.tbl_settings_setting_id_seq', 1, false);
 
 
 --
--- TOC entry 3380 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3415 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: tbl_tasks_task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tbl_tasks_task_id_seq', 15, true);
+
+
+--
+-- TOC entry 3416 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: tbl_users_roles_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -410,16 +668,16 @@ SELECT pg_catalog.setval('public.tbl_users_roles_role_id_seq', 12, true);
 
 
 --
--- TOC entry 3381 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 3417 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: tbl_users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.tbl_users_user_id_seq', 16, true);
+SELECT pg_catalog.setval('public.tbl_users_user_id_seq', 19, true);
 
 
 --
--- TOC entry 3201 (class 2606 OID 24601)
+-- TOC entry 3219 (class 2606 OID 16434)
 -- Name: scan scan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -428,7 +686,7 @@ ALTER TABLE ONLY public.scan
 
 
 --
--- TOC entry 3211 (class 2606 OID 24627)
+-- TOC entry 3221 (class 2606 OID 16436)
 -- Name: tabl_last_passwords tabl_last_passwords_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -437,7 +695,25 @@ ALTER TABLE ONLY public.tabl_last_passwords
 
 
 --
--- TOC entry 3213 (class 2606 OID 24636)
+-- TOC entry 3235 (class 2606 OID 16483)
+-- Name: tbl_containers tbl_containers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_containers
+    ADD CONSTRAINT tbl_containers_pkey PRIMARY KEY (containers_id);
+
+
+--
+-- TOC entry 3233 (class 2606 OID 16493)
+-- Name: tbl_images tbl_images_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_images
+    ADD CONSTRAINT tbl_images_pkey PRIMARY KEY (images_id);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 16438)
 -- Name: tbl_settings tbl_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -446,7 +722,16 @@ ALTER TABLE ONLY public.tbl_settings
 
 
 --
--- TOC entry 3203 (class 2606 OID 24611)
+-- TOC entry 3237 (class 2606 OID 24584)
+-- Name: tbl_tasks tbl_tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tbl_tasks
+    ADD CONSTRAINT tbl_tasks_pkey PRIMARY KEY (task_id);
+
+
+--
+-- TOC entry 3225 (class 2606 OID 16440)
 -- Name: tbl_users tbl_users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -455,7 +740,7 @@ ALTER TABLE ONLY public.tbl_users
 
 
 --
--- TOC entry 3207 (class 2606 OID 24620)
+-- TOC entry 3229 (class 2606 OID 16442)
 -- Name: tbl_users_roles tbl_users_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -464,7 +749,7 @@ ALTER TABLE ONLY public.tbl_users_roles
 
 
 --
--- TOC entry 3209 (class 2606 OID 24643)
+-- TOC entry 3231 (class 2606 OID 16444)
 -- Name: tbl_users_roles title; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -473,7 +758,7 @@ ALTER TABLE ONLY public.tbl_users_roles
 
 
 --
--- TOC entry 3205 (class 2606 OID 24641)
+-- TOC entry 3227 (class 2606 OID 16446)
 -- Name: tbl_users username login; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -481,7 +766,7 @@ ALTER TABLE ONLY public.tbl_users
     ADD CONSTRAINT "username login" UNIQUE (username, login);
 
 
--- Completed on 2023-06-17 20:40:16
+-- Completed on 2023-07-07 15:41:09
 
 --
 -- PostgreSQL database dump complete

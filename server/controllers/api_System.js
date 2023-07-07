@@ -4,21 +4,19 @@ const Passwords = require("../models/_passwords.js");
 const Settings  = require("../models/_settings");
 const sha512    = require('js-sha512');
 const Log       = require('../components/log');
-const path              = require('path')
-const fs                = require('fs')
+const path      = require('path')
+const fs        = require('fs')
     /**
      * Класс данных для страницы заказчиков
      */
-class Api_System extends Log  {
+class Api_System extends Log{
         
     name = "Api_System";
    
     async getTranslate(req, res) {   
-        self.green("getTranslate");
-        try {
-      const {lang} = req.query;
-     //   console.log(req.query)
-    
+    self.green(".getTranslate");
+    try {
+    const {lang} = req.query;    
     let fileContent = fs.readFileSync(path.resolve(__dirname,'..', 'translations', `${lang}.json`), "utf8");
    // console.log(fileContent)
           let response = {

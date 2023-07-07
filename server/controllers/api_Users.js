@@ -81,7 +81,7 @@ class Api_Users extends Log  {
             data.position, 
             data.phone_int, 
             data.phone_mob, 
-            data.email, 
+            String(data.email), 
             data.enabled?  Number(data.enabled) : '0',
             data.rem );
         //console.log(result)

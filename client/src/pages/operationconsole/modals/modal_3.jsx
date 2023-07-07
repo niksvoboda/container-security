@@ -89,16 +89,28 @@ async function handleFileInputChange(event) {
       readImage(files[i])      
       i++;
     }    
-    await sleep(2000)
+    await sleep(1000)
    // console.log(containers)
   //  console.log(images)
     set_show_images(images.length)
     set_show_containers(containers.length)
+    setValue('images',images)
+    setValue('containers',containers)
 } 
 
 const [type, set_type] = useState(0)   
 return (
 <>
+<div className="row">
+   <div className="col-sm-6">
+      <div class="input-group input-group-dynamic is-filled my-3 ">
+         <label class="form-label">Название задачи</label>
+         <input
+         {...register('title', { maxLength: 500, required: true})}
+         type="email" class="form-control"/>
+      </div>
+   </div>
+</div>
 <div className="row">
    <div className="col-sm-6">
       <div class="input-group input-group-dynamic is-filled my-3 ">    
@@ -118,7 +130,8 @@ return (
          <input 
             type="file" 
             name="files[]" 
-            accept=".txt,.csv,.xml"
+            accept=".txt"
+           // accept=".txt,.csv,.xml"
             multiple         
             onChange={event=>handleFileInputChange(event)} 
             />  
@@ -138,14 +151,14 @@ return (
 {show_images > -1 && <div className="row">
    <div className="col-sm-12">
       <div class="input-group input-group-dynamic is-filled my-3 ">
-         <label class="form-label">Найдено образов {show_images}</label>
+         <label class="form-label"></label>Найдено образов: {show_images}
       </div>
    </div>
 </div>}
 {show_containers > -1 && <div className="row">
    <div className="col-sm-12">
       <div class="input-group input-group-dynamic is-filled my-3 ">
-         <label class="form-label">Найдено контейнеров {show_containers}</label>
+         <label class="form-label"></label>Найдено контейнеров: {show_containers}
       </div>
    </div>
 </div>}

@@ -63,7 +63,7 @@ useEffect(()=>{
 },[length])
 
    /** Обслуживаем модальные окна */   
-   const [hideModal, set_hideModal] = useState(false)
+   const [hideModal, set_hideModal] = useState(true)
    const [entry_id, set_entry_id] = useState(null)
    const [hideDeleteModal, set_hideDeleteModal] = useState(false)
    const [entry, set_entry] = useState(null)
@@ -115,6 +115,7 @@ useEffect(()=>{
     * вызываем по клику на кнопку удалить назначаем entry_id 
     * чтобы он пропсом передался в модальное окно вместе с функцией удаления*/
    const open_delete_Entry = (entry_id) =>{
+      console.log(entry_id)
       set_entry_id(entry_id);
       set_hideDeleteModal(true);
    }
@@ -226,8 +227,8 @@ return (<>
                   </tr>
                    </thead>
                    <tbody>
-                   {content?.map(entry=><tr key={String(entry.tasks_id)}>
-                        <td className="text-sm font-weight-normal">{entry.tasks_id}</td>
+                   {content?.map(entry=><tr key={String(entry.task_id)}>
+                        <td className="text-sm font-weight-normal">{entry.task_id}</td>
                         <td className="text-sm font-weight-normal">{entry.title}</td>
                         <td className="text-sm font-weight-normal">{entry.task_type}</td>
                         <td className="text-sm font-weight-normal">{entry.start}</td>
@@ -236,9 +237,9 @@ return (<>
                         <td className="text-sm font-weight-normal">{entry.creator_id}</td>
                         <td className="text-sm font-weight-normal">{date_format(entry.created_dt, mask)}</td>                      
                         <td className="text-sm font-weight-normal"><i className="material-icons cursor-pointer" title={translate('scheduledjobs.edit_entry')} 
-                           onClick={event=> open_update_Entry(entry.tasks_id)} >edit</i></td>                       
+                           onClick={event=> open_update_Entry(entry.task_id)} >edit</i></td>                       
                         <td className="text-sm font-weight-normal"><i className="material-icons cursor-pointer" title={translate('scheduledjobs.delete_entry')} 
-                           onClick={event=> open_delete_Entry(entry.tasks_id)}>delete</i></td>
+                           onClick={event=> open_delete_Entry(entry.task_id)}>delete</i></td>
                       </tr>)}
                    </tbody>
                 </table>

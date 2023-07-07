@@ -28,6 +28,16 @@ return (
 <div className="row">
    <div className="col-sm-6">
       <div class="input-group input-group-dynamic is-filled my-3 ">
+         <label class="form-label">Название задачи</label>
+         <input
+         {...register('title', { maxLength: 500})}
+         type="email" class="form-control"/>
+      </div>
+   </div>
+</div>
+<div className="row">
+   <div className="col-sm-6">
+      <div class="input-group input-group-dynamic is-filled my-3 ">
          <label class="form-label">Выбрать оркестратор</label>
          <select {...register('orchestrator')}
          type="email" class="form-control dark-version">

@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { UserContext, TranslateContext } from './contex';
 import AppRouter from './components/AppRouter';
 import jwt_decode from "jwt-decode";
@@ -10,20 +8,18 @@ import { fetchTranslate } from './http/api_system';
 
 function App() {
   const [user, setUser] = useState({username: null, login:'nul1l', isAuth: false, role: 0, permissions:{}})
-  /** Мультиязычность */
-  const [lang, set_lang] = useState(localStorage.getItem('lang') || 'ru') 
+/** Мультиязычность */
+  const [lang, set_lang] = useState(localStorage.getItem('lang') || 'ru')
   const [dictionary, set_dictionary] = useState({})
-
   const translate = (phrase) =>{
     let phrases =  phrase.split('.')
-    
     let sub_dict = dictionary
     for(const e of phrases){
       sub_dict = sub_dict[e]?  sub_dict[e] : e
-    }   
+    }
     return typeof(sub_dict) == 'string' ? sub_dict : phrase
-  }
-  /** подгружаем словари при изменении пикера */
+}
+/** подгружаем словари при изменении пикера */
   useEffect(()=>{
     fetchTranslate(lang)
      .then((content) => {
@@ -32,17 +28,14 @@ function App() {
       .catch((err) => {console.error(err);})
   },[lang])
 
-  /** при загрузке страницы узнаем если пользователь имеет действительный токен то подтягиваем все данные */
+/** при загрузке страницы узнаем если пользователь имеет действительный токен то подтягиваем все данные */
   let  decode
   useEffect(()=>{
     if(localStorage.getItem('token')){
       try {
-     // console.log(localStorage.getItem('token'))
         decode = jwt_decode(localStorage.getItem('token'))
-     //   console.log(decode)
       } catch (error) {
         console.log(error)
-       // console.log(localStorage.getItem('token'))
       }
     }
     if (decode?.id) {
@@ -55,7 +48,7 @@ function App() {
     localStorage.setItem('lang', lang);
   },[lang])
 
-  return (
+return(
     <UserContext.Provider value={{
       user,
       setUser
@@ -64,7 +57,7 @@ function App() {
         lang,
         set_lang,
         translate
-        }}>     
+        }}>
             <SnackbarProvider>
                 <BrowserRouter>
                     <AppRouter/>

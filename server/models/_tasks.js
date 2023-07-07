@@ -20,35 +20,28 @@ class Tasks  extends Log {
         return result;
     }
 
-    async addEntry(
-            title,
-            permissions,
-            creator_id) {
+    async addEntry(title, task_type, logs, _period, creator_id, _start, _end, status) {
         self.blue(".addEntry")
         let result = await db.asyncQuery(`INSERT INTO tbl_tasks 
-        (   title,
-            permissions,
-            creator_id) 
-        VALUES ($1,$2,$3)`,
-         [  title,
-            permissions,
-            creator_id]);
+        (title, task_type, logs, _period, creator_id, _start, _end, status) 
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+         [title, task_type, logs, _period, creator_id, _start, _end, status]);
         return result;
     }
     async updateEntry(
         title,
         permissions,
-        creator_id,
+        task_id,
         id) {
         self.blue(".updateEntry")
         let result = await db.asyncQuery(`UPDATE tbl_tasks SET
             title    = $1,
             permissions   = $2,
-            creator_id  = $3
+            task_id  = $3
             WHERE task_id = $4`, [
             title,
             permissions,
-            creator_id,
+            task_id,
             id,
             ]);
         return result;

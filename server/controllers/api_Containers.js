@@ -1,6 +1,6 @@
 
 const Log       = require("../components/log.js");
-const Roles     = require("../models/_roles.js");
+const Containers     = require("../models/_containers.js");
 
 class Api_Containers extends Log {
     name = "Api_Containers";
@@ -9,7 +9,8 @@ class Api_Containers extends Log {
             self.green(".getEntrys");
             const {start, length, search} = req.query;
             /** Получаем и формируем страницу */
-            const result = await Roles.getEntrys(search);
+            const result = await Containers.getEntrys(search);
+            
             let response = {
               status: "OK",
               data: result.slice(Number(start), Number(start)+Number(length)),
@@ -21,6 +22,7 @@ class Api_Containers extends Log {
                     message: String(result[0].message)
                 }
                 }
+                console.log(response)
               return res.status(200).json(response)
         } catch (error) {
             console.log(error)
@@ -32,7 +34,7 @@ class Api_Containers extends Log {
         try{
             self.green(".getRole");
             const {id} = req.query;
-            const result =   await Roles.getEntry(id)
+            const result =   await Containers.getEntry(id)
             let response = {
                 status: "OK",
                 data: result,
@@ -75,7 +77,7 @@ class Api_Containers extends Log {
                 status: "OK"
             }
             /**Проверяем есть ли такой пользователь в базе */
-            const user_role =   await Roles.getRoleByTitle(data.title)
+            const user_role =   await Containers.getRoleByTitle(data.title)
             console.log(user_role)
             if (user_role?.length>0) {
                 response = {
@@ -84,7 +86,7 @@ class Api_Containers extends Log {
                    
                 }
             } else {
-                const result =   await Roles.addEntry(data.title, JSON.stringify(permissions), creator_id)
+                const result =   await Containers.addEntry(data.title, JSON.stringify(permissions), creator_id)
                 response = {
                     status: "OK",
                     message: 'Роль сохранена'
@@ -126,7 +128,7 @@ class Api_Containers extends Log {
                 reports_edit:           data.reports_edit,
             }
             console.log(data.title, JSON.stringify(permissions), creator_id, id)    
-            const result =   await Roles.updateEntry(data.title, JSON.stringify(permissions), creator_id, id)
+            const result =   await Containers.updateEntry(data.title, JSON.stringify(permissions), creator_id, id)
             let response = {
                     status: "OK",
                     message: 'Роль сохранена'
@@ -149,7 +151,7 @@ class Api_Containers extends Log {
         try{
             self.green(".deleteEntry");            
             const {id} = req.body.params;
-            const result =   await Roles.deleteEntry(id)
+            const result =   await Containers.deleteEntry(id)
             let response = {
                     status: "OK",
                     message: 'Роль удалена'
