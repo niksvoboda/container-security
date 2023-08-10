@@ -9,7 +9,7 @@ const {user} = useContext(UserContext)
 const {translate} = useContext(TranslateContext)
 /** Создаем форму если запись указана то подставляем данные   */    
 const {register, handleSubmit, formState:{errors}, setValue} = useForm({ defaultValues:{
-    task_type: '2'
+    task_type: '3'
 }, mode: 'onChange'});            
 const onSubmit = (data) =>{
 confirm_save_Entry(data,  null)

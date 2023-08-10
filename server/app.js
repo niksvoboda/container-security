@@ -19,6 +19,7 @@ class App extends Log {
       app.use(cors());
       /** Подключаем возможность обращения к нашему API с помощью JSON-запросов */       
       app.use(express.json({ limit: '500kb' }));
+      app.use(express.urlencoded({ extended: true })); // support encoded bodies
       app.use('/avatars', express.static(path.resolve(__dirname, 'static', 'avatars')))      
       app.use('/actions', express.static(path.resolve(__dirname, 'static', 'actions'))) 
       app.use('/pdf',     express.static(path.resolve(__dirname, 'static', 'pdf')))    

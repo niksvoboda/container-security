@@ -19,9 +19,7 @@ const options = [
     {value: '2', name: 'Kubernetis'},
     {value: '3', name: 'K3s'},
     {value: '4', name: 'DockerSwarm'},
-  ]
-
-  
+  ]  
 return (
      <>
      <div className="row">
@@ -47,29 +45,22 @@ return (
                     </div>
               </div>                     
             </div>
-            <div className="row">
-                <div className="col-sm-6">
-                        <div class="input-group input-group-dynamic is-filled my-3 ">
-                            <label class="form-label">Тип задачи</label>
-                            <select {...register('orchestrator')}
-                            type="email" class="form-control dark-version">
-                            {options.map( p=>
-                            <option value={p.value}>{p.name}</option>
-                            )}                
-                        </select> 
-                    </div>
-                </div>          
-            </div>
-            <div className="row">
+               <div className="row">
                 <div class="form-check form-check-info text-left">
-                <input {...register('execute_analysis')} class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="flexCheckDefault">Производить анализ</label>
+                <input {...register('import_images')} class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" for="flexCheckDefault">Импорт образов</label>
                 </div>
             </div>
             <div className="row">
                 <div class="form-check form-check-info text-left">
-                <input {...register('use_alt_scan')} class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="flexCheckDefault">Использовать альтернативное сканирование</label>
+                <input {...register('import_containers')} class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" for="flexCheckDefault">Импорт контейнеров</label>
+                </div>
+            </div>
+            <div className="row">
+                <div class="form-check form-check-info text-left">
+                <input {...register('import_extended')} class="form-check-input" type="checkbox" />
+                        <label class="form-check-label" for="flexCheckDefault">Расширенный импорт</label>
                 </div>
             </div>
             <div className="row">

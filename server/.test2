@@ -1,0 +1,633 @@
+[
+   {
+      "Id": "72ef0293a3bbd45c6c3786b43e46906db22258d1aad7c93e42302c2bc7aaa610",
+      "Names": [
+         "/gitea"
+      ],
+      "Image": "gitea/gitea:1.17.3",
+      "ImageID": "sha256:8376639274f823e53d5de2248a1d2553593dc8b1cd26e0a0362616ca3b740fe7",
+      "Command": "/usr/bin/entrypoint /bin/s6-svscan /etc/s6",
+      "Created": 1671458844,
+      "Ports": [
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 22,
+            "PublicPort": 222,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 22,
+            "PublicPort": 222,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 3000,
+            "PublicPort": 3000,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 3000,
+            "PublicPort": 3000,
+            "Type": "tcp"
+         }
+      ],
+      "Labels": {
+         "com.docker.compose.config-hash": "38b1ca9a9750bee539427777c2b9fd5a178ed6830265514ccb53e192de975ffa",
+         "com.docker.compose.container-number": "1",
+         "com.docker.compose.oneoff": "False",
+         "com.docker.compose.project": "tst",
+         "com.docker.compose.project.config_files": "docker-compose.yml",
+         "com.docker.compose.project.working_dir": "/home/lizard/Downloads/tst",
+         "com.docker.compose.service": "server",
+         "com.docker.compose.version": "1.29.2",
+         "maintainer": "maintainers@gitea.io",
+         "org.opencontainers.image.created": "2022-10-15T13:34:51Z",
+         "org.opencontainers.image.revision": "f48fda8eefa4d47e335f01ac92366b9373950e0e",
+         "org.opencontainers.image.source": "https://github.com/go-gitea/gitea.git",
+         "org.opencontainers.image.url": "https://github.com/go-gitea/gitea"
+      },
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "tst_gitea"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "tst_gitea": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "6926550d867631dec053460dc3ba87e5e561943aac1cb72a106c522113a195d6",
+               "EndpointID": "05fcc58dc2bb6961a1fb0db998ece8efb7b5002411b282279ae1b4d9fa624391",
+               "Gateway": "172.26.0.1",
+               "IPAddress": "172.26.0.2",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "02:42:ac:1a:00:02",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": [
+         {
+            "Type": "bind",
+            "Source": "/etc/timezone",
+            "Destination": "/etc/timezone",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+         },
+         {
+            "Type": "bind",
+            "Source": "/home/lizard/Downloads/tst/gitia",
+            "Destination": "/home/git/gitea/custom",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+         },
+         {
+            "Type": "bind",
+            "Source": "/home/lizard/Downloads/tst/gitea",
+            "Destination": "/data",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+         },
+         {
+            "Type": "bind",
+            "Source": "/etc/localtime",
+            "Destination": "/etc/localtime",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rprivate"
+         }
+      ]
+   },
+   {
+      "Id": "ac1e9d753c9851f038e78ef4c434758a0c191c8d71054720ca6a25a4a8b7e586",
+      "Names": [
+         "/deepfence-agent"
+      ],
+      "Image": "deepfenceio/deepfence_agent_ce:1.4.1",
+      "ImageID": "sha256:299b8004c78cb9fd62c012d131bd886f25702829cfa66148f99f8624c41e3f4d",
+      "Command": "/usr/local/bin/start_services",
+      "Created": 1671457320,
+      "Ports": [],
+      "Labels": {
+         "deepfence.role": "system"
+      },
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "host"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "host": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "703a9fad8361a3ef4da854a0ca571b5afe90e0e30ae3de4873176d2271d9afd0",
+               "EndpointID": "fe54ede090e7dd6735ffa5bf6fea302e4c8e378d9f3201b06b0fde532c52c0db",
+               "Gateway": "",
+               "IPAddress": "",
+               "IPPrefixLen": 0,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": [
+         {
+            "Type": "bind",
+            "Source": "/",
+            "Destination": "/fenced/mnt/host",
+            "Mode": "ro",
+            "RW": false,
+            "Propagation": "rslave"
+         },
+         {
+            "Type": "bind",
+            "Source": "/sys/kernel/debug",
+            "Destination": "/sys/kernel/debug",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+         },
+         {
+            "Type": "volume",
+            "Name": "714fde9ce1ac949bca9f329b2c1da3743545418b2af76ecb9ca6d97ec54d4779",
+            "Source": "",
+            "Destination": "/var/log/fenced",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "bind",
+            "Source": "/var/run/docker.sock",
+            "Destination": "/var/run/docker.sock",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+         }
+      ]
+   },
+   {
+      "Id": "97879088cb60f3b2767a32efcb8e340e66ba7e69981a8a5c3b20fee2d902ce54",
+      "Names": [
+         "/portainer"
+      ],
+      "Image": "portainer/portainer-ce:latest",
+      "ImageID": "sha256:728247220223d9e342b751ff72dc4f9312c4fd45bdc80d64ad9c796b5c5666eb",
+      "Command": "/portainer",
+      "Created": 1667577268,
+      "Ports": [
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 8000,
+            "PublicPort": 8000,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 8000,
+            "PublicPort": 8000,
+            "Type": "tcp"
+         },
+         {
+            "PrivatePort": 9000,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 9443,
+            "PublicPort": 9443,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 9443,
+            "PublicPort": 9443,
+            "Type": "tcp"
+         }
+      ],
+      "Labels": {
+         "com.docker.desktop.extension.api.version": ">= 0.2.2",
+         "com.docker.desktop.extension.icon": "https://portainer-io-assets.sfo2.cdn.digitaloceanspaces.com/logos/portainer.png",
+         "com.docker.extension.additional-urls": "[{\"title\":\"Website\",\"url\":\"https://www.portainer.io?utm_campaign=DockerCon&utm_source=DockerDesktop\"},{\"title\":\"Documentation\",\"url\":\"https://docs.portainer.io\"},{\"title\":\"Support\",\"url\":\"https://join.slack.com/t/portainer/shared_invite/zt-txh3ljab-52QHTyjCqbe5RibC2lcjKA\"}]",
+         "com.docker.extension.detailed-description": "<p data-renderer-start-pos=\"226\">Portainer&rsquo;s Docker Desktop extension gives you access to all of Portainer&rsquo;s rich management functionality within your docker desktop experience.<\/p><h2 data-renderer-start-pos=\"374\">With Portainer you can:<\/h2><ul><li>See all your running containers<\/li><li>Easily view all of your container logs<\/li><li>Console into containers<\/li><li>Easily deploy your code into containers using a simple form<\/li><li>Turn your YAML into custom templates for easy reuse<\/li><\/ul><h2 data-renderer-start-pos=\"660\">About Portainer&nbsp;<\/h2><p data-renderer-start-pos=\"680\">Portainer is the worlds&rsquo; most popular universal container management platform with more than 650,000 active monthly users. Portainer can be used to manage Docker Standalone, Kubernetes, Docker Swarm and Nomad environments through a single common interface. It includes a simple GitOps automation engine and a Kube API.&nbsp;<\/p><p data-renderer-start-pos=\"1006\">Portainer Business Edition is our fully supported commercial grade product for business-wide use. It includes all the functionality that businesses need to manage containers at scale. Visit <a class=\"sc-jKJlTe dPfAtb\" href=\"http://portainer.io/\" title=\"http://Portainer.io\" data-renderer-mark=\"true\">Portainer.io<\/a> to learn more about Portainer Business and <a class=\"sc-jKJlTe dPfAtb\" href=\"http://portainer.io/take5?utm_campaign=DockerCon&amp;utm_source=Docker%20Desktop\" title=\"http://portainer.io/take5?utm_campaign=DockerCon&amp;utm_source=Docker%20Desktop\" data-renderer-mark=\"true\">get 5 free nodes.<\/a><\/p>",
+         "com.docker.extension.publisher-url": "https://www.portainer.io",
+         "com.docker.extension.screenshots": "[{\"alt\": \"screenshot one\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-1.png\"},{\"alt\": \"screenshot two\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-2.png\"},{\"alt\": \"screenshot three\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-3.png\"},{\"alt\": \"screenshot four\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-4.png\"},{\"alt\": \"screenshot five\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-5.png\"},{\"alt\": \"screenshot six\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-6.png\"},{\"alt\": \"screenshot seven\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-7.png\"},{\"alt\": \"screenshot eight\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-8.png\"},{\"alt\": \"screenshot nine\", \"url\": \"https://portainer-io-assets.sfo2.digitaloceanspaces.com/screenshots/docker-extension-9.png\"}]",
+         "org.opencontainers.image.description": "Docker container management made simple, with the world’s most popular GUI-based container management platform.",
+         "org.opencontainers.image.title": "Portainer",
+         "org.opencontainers.image.vendor": "Portainer.io"
+      },
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "default"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "bridge": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "1ccaec273d733dcb8fdd90cb78ff5dabc502a59dbe41cda24adfb2a6a084ac3e",
+               "EndpointID": "8f8f2ff21aef98fc20f1a7dc09132024544e19c3c58c134ceed4fbf032b15751",
+               "Gateway": "172.17.0.1",
+               "IPAddress": "172.17.0.5",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "02:42:ac:11:00:05",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": [
+         {
+            "Type": "bind",
+            "Source": "/var/run/docker.sock",
+            "Destination": "/var/run/docker.sock",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+         },
+         {
+            "Type": "volume",
+            "Name": "portainer_data",
+            "Source": "/var/lib/docker/volumes/portainer_data/_data",
+            "Destination": "/data",
+            "Driver": "local",
+            "Mode": "z",
+            "RW": true,
+            "Propagation": ""
+         }
+      ]
+   },
+   {
+      "Id": "a357fb76e8608ef49949dd2e729bf8c0a6b6ca9a576a749917e8955983ee4769",
+      "Names": [
+         "/remotely"
+      ],
+      "Image": "translucency/remotely:latest",
+      "ImageID": "sha256:83930f5b2514e31f21ce9afea1ffa8248b66811b7ace056082d21f278ff140ab",
+      "Command": "/DockerMain.sh",
+      "Created": 1652973285,
+      "Ports": [
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 5000,
+            "PublicPort": 5000,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 5000,
+            "PublicPort": 5000,
+            "Type": "tcp"
+         }
+      ],
+      "Labels": {
+         "com.azure.dev.image.build.buildnumber": "20210827.1",
+         "com.azure.dev.image.build.builduri": "vstfs:///Build/Build/1273",
+         "com.azure.dev.image.build.definitionname": "Publish Docker",
+         "com.azure.dev.image.build.repository.name": "Remotely",
+         "com.azure.dev.image.build.repository.uri": "https://translucency@dev.azure.com/translucency/Remotely/_git/Remotely",
+         "com.azure.dev.image.build.sourcebranchname": "master",
+         "com.azure.dev.image.build.sourceversion": "14291e09204751ed93df12b4866f882bd097d7c0",
+         "com.azure.dev.image.system.teamfoundationcollectionuri": "https://dev.azure.com/translucency/",
+         "com.azure.dev.image.system.teamproject": "Remotely",
+         "image.base.digest": "sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3",
+         "image.base.ref.name": "ubuntu:focal"
+      },
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "default"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "bridge": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "1ccaec273d733dcb8fdd90cb78ff5dabc502a59dbe41cda24adfb2a6a084ac3e",
+               "EndpointID": "0c15f50b948723cf1fb50876d18d29303f63b00a93bea13067fce3f37dc6b4f4",
+               "Gateway": "172.17.0.1",
+               "IPAddress": "172.17.0.2",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "02:42:ac:11:00:02",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": [
+         {
+            "Type": "bind",
+            "Source": "/var/opt/ssd/kayloren",
+            "Destination": "/remotely-data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+         }
+      ]
+   },
+   {
+      "Id": "03cff8f4909ba0dcd8d2c63058737347756152a388a3c60c91938d58fb2c9e59",
+      "Names": [
+         "/zabbix-appliance"
+      ],
+      "Image": "zabbix/zabbix-appliance:latest",
+      "ImageID": "sha256:663a9b177b5407a259616c294a157d59f55db00f300f5e97fa6eb2a623c5adf0",
+      "Command": "/sbin/tini -- /usr/bin/docker-entrypoint.sh",
+      "Created": 1646642843,
+      "Ports": [
+         {
+            "PrivatePort": 443,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 80,
+            "PublicPort": 81,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 80,
+            "PublicPort": 81,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 10051,
+            "PublicPort": 10051,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 10051,
+            "PublicPort": 10051,
+            "Type": "tcp"
+         }
+      ],
+      "Labels": {
+         "org.label-schema.build-date": "",
+         "org.label-schema.description": "Zabbix appliance with MySQL database support and nginx web-server",
+         "org.label-schema.docker.cmd": "docker run --name zabbix-appliance -p 80:80 -p 10051:10051 -d zabbix-appliance:alpine-4.4.6",
+         "org.label-schema.license": "GPL 2.0",
+         "org.label-schema.name": "zabbix-server-mysql-alpine",
+         "org.label-schema.schema-version": "1.0",
+         "org.label-schema.url": "https://zabbix.com/",
+         "org.label-schema.usage": "https://www.zabbix.com/documentation/4.4/manual/installation/containers",
+         "org.label-schema.vcs-ref": "",
+         "org.label-schema.vcs-url": "https://git.zabbix.com/scm/zbx/zabbix.git",
+         "org.label-schema.vendor": "Zabbix LLC",
+         "org.label-schema.version": "4.4.6"
+      },
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "default"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "bridge": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "1ccaec273d733dcb8fdd90cb78ff5dabc502a59dbe41cda24adfb2a6a084ac3e",
+               "EndpointID": "df9c78b31acfdf667933146ca615e89ef1c0d6edd30a6bfda7e815956a320ce3",
+               "Gateway": "172.17.0.1",
+               "IPAddress": "172.17.0.3",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "02:42:ac:11:00:03",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": [
+         {
+            "Type": "volume",
+            "Name": "d13e7bc38f12d6fecb479a13bc1a436b21043c818adfa85608fe66ea93f18bc0",
+            "Source": "",
+            "Destination": "/var/lib/mysql",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "fa0406fb407a613a20affbf2cc35224fb95fb0b016291f7aba16d4478257afb4",
+            "Source": "",
+            "Destination": "/etc/ssl/nginx",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "fe4b64565453684c619c3cfb8c08f17ba7caad83e6de295145ac29e36addeffe",
+            "Source": "",
+            "Destination": "/usr/lib/zabbix/alertscripts",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "1875f34178066be6eb8f068f23154c0ae26ff77cc085782fe4dbfc1fbaa2441e",
+            "Source": "",
+            "Destination": "/usr/lib/zabbix/externalscripts",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "fdad74d2e9cc1e2b03da6471cc20115abc27076dfd4ea96cb171d93b4700d37a",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/snmptraps",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "9f01b9de52ad9be884b47f3e535f2f6860e502be2de04c8015269bb7ac43160d",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/ssh_keys",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "ed64a1fb76bc41510a27cc4b3d52a1e3146eb6abd19558b059b348186229751d",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/ssl/certs",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "751f4c772d17c8f107742b710955c7d0628434c8164614b6d87bc3be788aab08",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/ssl/keys",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "42811dee9c2a02cc295cab583f225e048fadc0af51b01956f34aae4e1e1c2c16",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/ssl/ssl_ca",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "74263d3e59069716594325e04122bddc6401d7c4900965066d3beff7d0ebbfcd",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/enc",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "e699481bd15f65f6da70befd5bcec95e14614652f592b20167845c1d81360e9f",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/mibs",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         },
+         {
+            "Type": "volume",
+            "Name": "22c0a8fa24097a39aaaaea4833b7329db01688c36950494902ffca6ccb1e38bb",
+            "Source": "",
+            "Destination": "/var/lib/zabbix/modules",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+         }
+      ]
+   },
+   {
+      "Id": "6dff8d401df7bb07e8d2f58b4120171fbef5858b68e2bdc51fa915e02c96fd77",
+      "Names": [
+         "/Gophish"
+      ],
+      "Image": "gophish/gophish:latest",
+      "ImageID": "sha256:960f1d30ad0eb9dca0a58f6f45eea38aecc3094edbbfd25ecfe007aaa804cf2d",
+      "Command": "./docker/run.sh",
+      "Created": 1646642796,
+      "Ports": [
+         {
+            "PrivatePort": 8443,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 3333,
+            "PublicPort": 3333,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 3333,
+            "PublicPort": 3333,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 443,
+            "PublicPort": 443,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 443,
+            "PublicPort": 443,
+            "Type": "tcp"
+         },
+         {
+            "IP": "0.0.0.0",
+            "PrivatePort": 80,
+            "PublicPort": 80,
+            "Type": "tcp"
+         },
+         {
+            "IP": "::",
+            "PrivatePort": 80,
+            "PublicPort": 80,
+            "Type": "tcp"
+         },
+         {
+            "PrivatePort": 8080,
+            "Type": "tcp"
+         }
+      ],
+      "Labels": {},
+      "State": "running",
+      "Status": "Up 48 minutes",
+      "HostConfig": {
+         "NetworkMode": "default"
+      },
+      "NetworkSettings": {
+         "Networks": {
+            "bridge": {
+               "IPAMConfig": null,
+               "Links": null,
+               "Aliases": null,
+               "NetworkID": "1ccaec273d733dcb8fdd90cb78ff5dabc502a59dbe41cda24adfb2a6a084ac3e",
+               "EndpointID": "d8ac706cfd77567476a1408fd4df06235efc69f5ae24d1d82377f3ec29f6e78a",
+               "Gateway": "172.17.0.1",
+               "IPAddress": "172.17.0.4",
+               "IPPrefixLen": 16,
+               "IPv6Gateway": "",
+               "GlobalIPv6Address": "",
+               "GlobalIPv6PrefixLen": 0,
+               "MacAddress": "02:42:ac:11:00:04",
+               "DriverOpts": null
+            }
+         }
+      },
+      "Mounts": []
+   }
+]

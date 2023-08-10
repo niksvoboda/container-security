@@ -1,7 +1,9 @@
 
 const Tasks         = require("../models/_tasks"); 
 const Log           = require("../components/log.js");
+const Axios         = require('axios')
 const ImportActives = require("../service/add_task/import_Actives")
+
     /**
      * Класс данных для страницы заказчиков
      */
@@ -42,11 +44,54 @@ class Api_Operation_console extends Log {
             };  
             switch(data.task_type){ 
                 case '2':
-                 const {counterAdd, counterUpdate} =  await ImportActives.ImportImages(data.images);
-                 const result =  await ImportActives.ImportContainers(data.containers);
-                 response.message = `Задача добавлена. 
-                 Контейнеров добавлено ${result.counterAdd}, обновлено ${result.counterUpdate}. 
-                 Образов добавлено ${counterAdd}, обновлено ${counterUpdate}`
+                    //Получаем по адресу JSON
+                    const baseURL = 'http://10.10.1.104:2375'
+                    const containersURL = '/containers/json'
+                    const imagesURL = '/images/json'
+                    const $authHost = Axios.create({
+                        baseURL: baseURL
+                    })
+                    let _counterAdd_img = 0
+                    let _counterUpdate_img = 0
+                    let _counterAdd_cont = 0
+                    let _counterUpdate_cont = 0
+                    // Если стоят галочки импорта то импортируем соответствующие вещи
+                    if (data.import_images){
+                        const {data} = await $authHost.get(imagesURL, {
+                            responseType:'json'
+                        });
+                        //data.image_id, data.repository, data.tag, data.size iterator[2],iterator[0], iterator[1]
+                       // const arr = Object.values(images);
+                       let new_images = JSON.parse(JSON.stringify(data))
+                      //   console.log(new_images)
+                       new_images = new_images.map(p=>[p.RepoTags, p.Id, p.RepoDigests])
+                       console.log(new_images)
+                        const {counterAdd, counterUpdate} = await ImportActives.ImportImages(new_images);
+                        _counterAdd_img = counterAdd
+                        _counterUpdate_img = counterUpdate
+                    }
+
+                    if (data.import_containers){
+                        const containers = await $authHost.get(containersURL, {});
+                        const {counterAdd, counterUpdate} =  await ImportActives.ImportImages(data.images);
+                        _counterAdd_cont = counterAdd
+                        _counterUpdate_cont = counterUpdate
+                    }
+                    response.message = `Задача добавлена.
+                    Контейнеров добавлено ${_counterAdd_cont}, обновлено ${_counterUpdate_cont}. 
+                    Образов добавлено ${_counterAdd_img}, обновлено ${_counterUpdate_img}`
+                   
+                   // console.log(data)    
+                    break;
+                case '3':
+                    {
+                    const {counterAdd, counterUpdate} =  await ImportActives.ImportImages(data.images);
+                    const result =  await ImportActives.ImportContainers(data.containers);
+                    response.message = `Задача добавлена.
+                    Контейнеров добавлено ${result.counterAdd}, обновлено ${result.counterUpdate}. 
+                    Образов добавлено ${counterAdd}, обновлено ${counterUpdate}`
+                    console.log(data.images)
+                    }
                  break;
                 default:
                     console.log("тип задачи не указан");

@@ -12,7 +12,7 @@ export const Modal = ({entry, confirm_save_Entry , exit}) => {
 /** Ролевая модель */
 const {user} = useContext(UserContext)
 const {translate} = useContext(TranslateContext)
-const [type_task, set_type_task] = useState("2")
+const [type_task, set_type_task] = useState("1")
 const [form, set_form] = useState(<Modal_1/>)
 //console.log(entry)
 /**Кнопка esc */

@@ -92,7 +92,7 @@ useEffect(()=>{
            if (result?.status === "OK") {
             openGreen(result?.message)
              /** Если запрос успешен закрываем форму и обнуляем ENTRY_ID */
-             exit()
+            // exit()
              } else {
             openRed(result?.message)
              }
@@ -104,7 +104,7 @@ useEffect(()=>{
            if (result?.status === "OK") {
             openGreen(result?.message)
              /** Если запрос успешен закрываем форму и обнуляем ENTRY_ID */
-             exit()
+         //    exit()
              } else {
             openRed(result?.message)
              }
