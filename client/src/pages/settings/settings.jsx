@@ -11,7 +11,7 @@ import Users from './users/users';
 
 
 const Settings = () => {
-   const [menu_item, set_menu_item] = useState(4);
+   const [menu_item, set_menu_item] = useState(0);
    const settings_menu = [
       {component:<Ldap/>, icon: 'fa fa-address-card', name: 'LDAP' },       
       {component:<Email/>, icon: 'fa fa-at', name: 'Почта' },   

@@ -9,10 +9,10 @@ class Settings  extends Log {
      */
     async getEntrysByGroup(group) {        
         self.blue(".getEntrysByGroup")
-        const result = await db.asyncQuery("SELECT * FROM tbl_settings WHERE `group` IN(?);",  [group]);
+        const result = await db.asyncQuery(`SELECT * FROM tbl_settings WHERE _group = $1`,  [group]);
         let res = {}
         for (const e of result){
-            res[e.key] = e.val
+            res[e._key] = e.val
         }   
         return res;
     }
@@ -22,10 +22,10 @@ class Settings  extends Log {
      * @param string key        Имя ключа
      * @param string val        Значение ключа
      */
-    async saveSetting(group, key, val) {        
-        self.blue(".saveSetting")
-        this.d(".saveSetting group:" + group + " key:" + key + " val:" + val);
-        await db.asyncQuery("call sp_set_setting(?, ?, ?)",  [ group, key, val ], [1]);       
+    async updateSetting(val, group, key) {        
+        self.blue(".updateSetting" + group + " key:" + key + " val:" + val)
+       
+        await db.asyncQuery(`UPDATE tbl_settings SET val = $1 WHERE _group = $2 AND _key = $3`, [val, group, key]);       
     }   
 }
 

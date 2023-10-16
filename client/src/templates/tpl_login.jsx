@@ -18,10 +18,10 @@ const [openRed, closeRed] = useSnackbar(option_red_snackbar)
 /** при логине страницы узнаем если пользователь имеет действительный токен то подтягиваем все данные */
 const {user, setUser} = useContext(UserContext)
 const navigate = useNavigate();
-const logIn = async (username, password, remember) => {
+const logIn = async (username, password, remember, type) => {
   console.log(remember)
 try{
-         const data = await login(username, password)
+         const data = await login(username, password, type)
          const decode = jwt_decode(data)
          if (decode?.id) {
 
@@ -38,11 +38,11 @@ try{
     } 
   }
   const onSubmit = (data) =>{
-      logIn(data.username,  data.password ,  data.remember)
+      logIn(data.username, data.password, data.remember, data.type)
       console.log(data)
   }    
 
-    return (
+return (
 <>
 <div className="container position-sticky z-index-sticky top-0">
     <div className="row">
@@ -65,6 +65,14 @@ try{
               </div>
               <div className="card-body">
                 <form role="form" className="text-start">
+                  <div class="input-group input-group-outline my-3 ">
+                     <label class="form-label">Должность</label>
+                     <select className="form-control dark-version"
+                    {...register("type")}>                  
+                    <option value={1}  style={{backgroundColor:'#black'}}>Локальный вход</option>
+                    <option value={2}  style={{backgroundColor:'#black'}}>Вход через AD</option>
+                    </select>
+                  </div>
                   <div className="input-group input-group-outline my-3 ">                   
                     <input 
                     type="email" 

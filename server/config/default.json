@@ -5,6 +5,7 @@
     "port": 3000,
     "port_ssl": 3001
   },
+
   "auth": { 
     "accessTokenExpTime": "72h",
     "refreshTokenExpTime": 200,
@@ -16,7 +17,12 @@
     "console" : "true"
   },
 
-  "home": "/",  
+  "home": "/",
+  
+  "scnaner":  {
+    "host" : "http://10.10.1.84:50100",
+    "polling_time": 5000
+  },
 
   "db_pg": {    
     "user": "postgres",

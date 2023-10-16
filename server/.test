@@ -4,3 +4,38 @@ router.get('/images/image', Auth, Api_Images.getEntry);
 router.post('/images/image_add', Auth, Api_Images.addEntry);
 router.post('/images/image_update', Auth,  Api_Images.updateEntry);
 router.post('/images/image_delete', Auth,  Api_Images.deleteEntry);
+
+-p - запуск nmap
+
+-j - запуск nimscan 
+
+-k - ip
+-w - диапазон ip
+-x ip/mask
+
+-a полный скан по всем портам (работает только для nmap)
+-r скан по портам docker 
+-m скан по определенным портам (работает только для nmap)
+-i скан по всем интерфейсам
+-l вывод текущих ошибок в консоль из файла log.txt
+
+
+
+       let charge_dt =  Utils.format_date(new Date())
+       //console.log(charge_dt)
+       let charges = await db.asyncQuery(`SELECT * FROM tbl_charges  WHERE charge_dt <= (?) AND status = 0`, [charge_dt], 1 );        
+       let users = await db.asyncQuery(`SELECT * FROM tbl_tg_users  WHERE invest > 0 AND enabled = 1`, [], 1 ); 
+       /** проход по массиву начислений - все необработанные записи со статусо 0 и датой начисления меньше текущей */
+       for(const e of charges){       
+         /** проход по массиву активных юзеров с инвестом больше нуля */
+         let current_rewards = {}
+         for(const v of users){
+          try {          
+
+            } catch (error) {
+              console.log(error)
+            } 
+          }
+ 
+      /** помечаем обработанные транзакции ставим статус 1 */  
+        let status_charged = await db.asyncQuery(`UPDATE tbl_charges SET status = 1   WHERE charge_id = (?)`, [e.charge_id], 1 ); 

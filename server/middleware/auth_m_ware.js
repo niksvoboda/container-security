@@ -1,8 +1,6 @@
 const jwt    = require('jsonwebtoken');
 const config = require("config");
 
-
-
 module.exports = function (req, res, next) {
    // if (req.method === "OPTIONS"){
      //   next()
@@ -21,8 +19,7 @@ module.exports = function (req, res, next) {
                 } else {
                      /** Если токен истек то транзакция стопается */           
                  return res.status(401).json({message: "не авторизован"})
-                }
-            
+                }            
             });
         }
        

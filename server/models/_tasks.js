@@ -10,7 +10,7 @@ class Tasks  extends Log {
         search = '%' + search + '%';
         let result = await db.asyncQuery(`SELECT * FROM tbl_tasks 
         WHERE title LIKE $1
-        ORDER BY task_id`, [search]);
+        ORDER BY task_id DESC`, [search]);
         return result;
     }
     /** Для формы редактирования */

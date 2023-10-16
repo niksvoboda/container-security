@@ -9,6 +9,7 @@ const router        = require("./routers/api_Router");
 const app           = express();
 const Log           = require("./components/log");
 const ldap          = require('ldapjs');
+const Sync_Scaner   = require('./components/sync_scaner');
 
 
 class App extends Log {
@@ -20,17 +21,17 @@ class App extends Log {
       /** Подключаем возможность обращения к нашему API с помощью JSON-запросов */       
       app.use(express.json({ limit: '500kb' }));
       app.use(express.urlencoded({ extended: true })); // support encoded bodies
-      app.use('/avatars', express.static(path.resolve(__dirname, 'static', 'avatars')))      
-      app.use('/actions', express.static(path.resolve(__dirname, 'static', 'actions'))) 
-      app.use('/pdf',     express.static(path.resolve(__dirname, 'static', 'pdf')))    
-     // app.use(fileUpload({}))
-     // app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 }, }));
       /** Подключаем роутер API */
       app.use('/api', router)
       this.showSplash();
       this.startClient();
-      this.startServer();      
+      this.startServer();    
+     // this.startSyncScaner();  
   }
+
+  startSyncScaner(){
+    Sync_Scaner.autoSyncCharges()
+  }  
 
   showSplash() {
       const splash = [
