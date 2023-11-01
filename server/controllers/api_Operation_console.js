@@ -42,7 +42,10 @@ class Api_Operation_console extends Log {
                 status: "OK",
                 message: 'Задача добавлена'
             };  
-            switch(data.task_type){ 
+            switch(data.task_type){
+                case '1':
+                    
+                    break;
                 case '2':
                     //Получаем по адресу JSON
                     const baseURL = 'http://10.10.1.104:2375'
