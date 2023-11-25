@@ -1,0 +1,14 @@
+экспорт бд
+
+cd C:\Users\Administrator\Documents\GitHub\container-security\server
+pg_dump -U postgres -W  postgres > dump.sql
+root
+
+Параметры подключения:
+  -d, --dbname=БД          имя базы данных для выгрузки
+  -h, --host=ИМЯ           имя сервера баз данных или каталог сокетов
+  -p, --port=ПОРТ          номер порта сервера БД
+  -U, --username=ИМЯ       имя пользователя баз данных
+  -w, --no-password        не запрашивать пароль
+  -W, --password           запрашивать пароль всегда (обычно не требуется)
+  --role=ИМЯ_РОЛИ          выполнить SET ROLE перед выгрузкой
